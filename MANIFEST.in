@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include employee_portal *.css
+recursive-include employee_portal *.csv
+recursive-include employee_portal *.html
+recursive-include employee_portal *.ico
+recursive-include employee_portal *.js
+recursive-include employee_portal *.json
+recursive-include employee_portal *.md
+recursive-include employee_portal *.png
+recursive-include employee_portal *.py
+recursive-include employee_portal *.svg
+recursive-include employee_portal *.txt
+recursive-exclude employee_portal *.pyc
