@@ -1,0 +1,260 @@
+{
+ "actions": [],
+ "creation": "2024-10-04 13:38:38.499937",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section1",
+  "per_date",
+  "per_evaluatee",
+  "per_position",
+  "column",
+  "per_evaluator",
+  "per_dept",
+  "section2",
+  "per_obj1",
+  "per_obj2",
+  "per_obj3",
+  "column5",
+  "per_cumplobj1",
+  "per_cumplobj2",
+  "per_cumplobj3",
+  "section3",
+  "per_comp1",
+  "per_comp2",
+  "per_comp3",
+  "column2",
+  "per_cumplcomp1",
+  "per_cumplcomp2",
+  "per_cumplcomp3",
+  "section4",
+  "per_colab1",
+  "per_colab2",
+  "per_colab3",
+  "column3",
+  "per_cumplcolab1",
+  "per_cumplcolab2",
+  "per_cumplcolab3",
+  "section5",
+  "per_feedback",
+  "column4",
+  "per_actionplan"
+ ],
+ "fields": [
+  {
+   "fieldname": "section1",
+   "fieldtype": "Section Break",
+   "label": "Informaci\u00f3n General"
+  },
+  {
+   "fieldname": "per_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha",
+   "reqd": 1
+  },
+  {
+   "fieldname": "per_evaluatee",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Evaluado",
+   "reqd": 1
+  },
+  {
+   "fieldname": "per_position",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cargo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "per_evaluator",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Evaluador",
+   "reqd": 1
+  },
+  {
+   "fieldname": "per_dept",
+   "fieldtype": "Data",
+   "label": "Departamento",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section2",
+   "fieldtype": "Section Break",
+   "label": "Objetivos y Resultados"
+  },
+  {
+   "fieldname": "per_obj1",
+   "fieldtype": "Small Text",
+   "label": "Objetivo y Resultado 1"
+  },
+  {
+   "fieldname": "per_obj2",
+   "fieldtype": "Small Text",
+   "label": "Objetivo y Resultado 2"
+  },
+  {
+   "fieldname": "per_obj3",
+   "fieldtype": "Small Text",
+   "label": "Objetivo y Resultado 3"
+  },
+  {
+   "fieldname": "per_cumplobj1",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 1",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "per_cumplobj2",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 2",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "per_cumplobj3",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 3",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "section3",
+   "fieldtype": "Section Break",
+   "label": "Competencias y Habilidades"
+  },
+  {
+   "fieldname": "per_comp1",
+   "fieldtype": "Data",
+   "label": "Competencias y Habilidades 1"
+  },
+  {
+   "fieldname": "per_comp2",
+   "fieldtype": "Data",
+   "label": "Competencias y Habilidades 2"
+  },
+  {
+   "fieldname": "per_comp3",
+   "fieldtype": "Data",
+   "label": "Competencias y Habilidades 3"
+  },
+  {
+   "fieldname": "column2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "per_cumplcomp1",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 1",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "per_cumplcomp2",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 2",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "per_cumplcomp3",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 3",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "section4",
+   "fieldtype": "Section Break",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo"
+  },
+  {
+   "fieldname": "per_colab1",
+   "fieldtype": "Data",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo 1"
+  },
+  {
+   "fieldname": "per_colab2",
+   "fieldtype": "Data",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo 2"
+  },
+  {
+   "fieldname": "per_colab3",
+   "fieldtype": "Data",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo 3"
+  },
+  {
+   "fieldname": "column3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "per_cumplcolab1",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 1",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "per_cumplcolab2",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 2",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "per_cumplcolab3",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 3",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "section5",
+   "fieldtype": "Section Break",
+   "label": "Retroalimentaci\u00f3n y Plan de Acci\u00f3n"
+  },
+  {
+   "fieldname": "per_feedback",
+   "fieldtype": "Text",
+   "label": "Feedback",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "per_actionplan",
+   "fieldtype": "Text",
+   "label": "Plan de Acci\u00f3n",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column5",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-04 13:43:52.170630",
+ "modified_by": "Administrator",
+ "module": "Employee Portal",
+ "name": "Performance Review",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

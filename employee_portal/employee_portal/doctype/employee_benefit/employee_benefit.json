@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "creation": "2024-10-04 11:24:08.140779",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "benn_title",
+  "benn_desc",
+  "column",
+  "benn_appli",
+  "benn_form",
+  "benn_attach"
+ ],
+ "fields": [
+  {
+   "fieldname": "benn_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "benn_desc",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "benn_attach",
+   "fieldtype": "Attach",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "benn_appli",
+   "fieldtype": "Data",
+   "label": "Application"
+  },
+  {
+   "fieldname": "benn_form",
+   "fieldtype": "Data",
+   "label": "Form "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-04 11:34:08.476016",
+ "modified_by": "Administrator",
+ "module": "Employee Portal",
+ "name": "Employee Benefit",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
