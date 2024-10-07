@@ -56,16 +56,18 @@
   },
   {
    "fieldname": "per_evaluatee",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Evaluado",
+   "options": "Employee",
    "reqd": 1
   },
   {
    "fieldname": "per_position",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Cargo",
+   "options": "Designation",
    "reqd": 1
   },
   {
@@ -74,15 +76,17 @@
   },
   {
    "fieldname": "per_evaluator",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Evaluador",
+   "options": "Employee",
    "reqd": 1
   },
   {
    "fieldname": "per_dept",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Departamento",
+   "options": "Department",
    "reqd": 1
   },
   {
@@ -92,17 +96,17 @@
   },
   {
    "fieldname": "per_obj1",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Objetivo y Resultado 1"
   },
   {
    "fieldname": "per_obj2",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Objetivo y Resultado 2"
   },
   {
    "fieldname": "per_obj3",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Objetivo y Resultado 3"
   },
   {
@@ -235,7 +239,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-04 13:43:52.170630",
+ "modified": "2024-10-07 14:32:55.601000",
  "modified_by": "Administrator",
  "module": "Employee Portal",
  "name": "Performance Review",
