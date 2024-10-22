@@ -1,48 +1,58 @@
 {
  "actions": [],
+ "autoname": "format:ANN-{YYYY}-{####}",
  "creation": "2024-10-04 10:37:45.232365",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "annc_title",
-  "annc_descr",
+  "title",
+  "content",
   "column1",
-  "annc_attachments"
+  "published_on",
+  "image"
  ],
  "fields": [
-  {
-   "bold": 1,
-   "fieldname": "annc_title",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Title",
-   "reqd": 1,
-   "translatable": 1
-  },
-  {
-   "fieldname": "annc_descr",
-   "fieldtype": "Text",
-   "in_list_view": 1,
-   "label": "Description",
-   "reqd": 1
-  },
   {
    "fieldname": "column1",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "annc_attachments",
-   "fieldtype": "Attach",
-   "label": "Attachments"
+   "bold": 1,
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "T\u00edtulo",
+   "reqd": 1,
+   "translatable": 1
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Descripci\u00f3n",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "published_on",
+   "fieldtype": "Date",
+   "label": "Fecha de Publicaci\u00f3n",
+   "reqd": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Imagen Adjunta"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-04 10:37:45.232365",
+ "modified": "2024-10-21 16:22:52.635410",
  "modified_by": "Administrator",
  "module": "Employee Portal",
  "name": "Announcement",
+ "name_case": "Title Case",
  "owner": "Administrator",
  "permissions": [
   {

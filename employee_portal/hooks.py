@@ -166,6 +166,7 @@ user_data_fields = [
 	}
 ]
 
+get_website_user_home_page = "employee_portal.employee_portal.utils.get_website_user_home_page"
 # Authentication and authorization
 # --------------------------------
 
@@ -173,3 +174,6 @@ user_data_fields = [
 # 	"employee_portal.auth.validate"
 # ]
 
+#website_route_rules = [
+#    {"from_route": "/employee_info", "to_route": "employee_info"},
+#]
