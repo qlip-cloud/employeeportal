@@ -1,0 +1,148 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+{% block title %}{{ ("Mis Datos") }}{% endblock %}
+{% block page_content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mis Datos</h2>
+            <form action="" method="post">
+                <div class="frappe-card">
+                  <h3>Información Personal</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="first_name">Primer Nombre</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" value="{{employee.first_name}}">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="email">Segundo Nombre</label>
+                        <input type="text" name="middle_name" id="middle_name" class="form-control" value="{{employee.middle_name}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="last_name">Apellido</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" value="{{employee.last_name}}">
+                      </div>        
+                    </div>
+                    <div class="col-md-6">     
+                      <div class="frappe-control">
+                        <label for="full-name">Nombre Completo</label>
+                        <input type="text" name="full_name" id="full_name" class="form-control" value="{{employee.employee_name}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="dob">Fecha de Nacimiento</label>
+                        <input type="date" name="dob" id="dob" class="form-control" value="{{employee.date_of_birth}}" disabled="True">
+                      </div>  
+                    </div>
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="gender">Género</label>
+                        <select name="gender" id="gender" class="form-control">
+                          {% for gender in genders%}
+                            <option value="{{gender.name}}" {% if employee.gender == gender.name %}selected{% endif %}>{{gender.name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="frappe-card">
+                  <h3>Información de Contacto</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="employee-number">Número Telefónico</label>
+                        <input type="tel" name="employee-number" id="employee-number" class="form-control" value="{{employee.employee_number}}">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="emergency-phone">Teléfono de Emergencia</label>
+                        <input type="tel" name="emergency-phone" id="emergency-phone" class="form-control" value="{{employee.emergency_phone_number}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="emergency-contact">Contacto de Emergencia/label>
+                          <input type="text" name="emergency-contact" id="emergency-contact" class="form-control" value="{{employee.person_to_be_contacted}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="frappe-card">
+                  <h3>Detalles del Empleo</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="company">Compañía</label>
+                        <input type="text" name="company" id="company" class="form-control" value="{{employee.company}}">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="employement-type">Tipo de Empleo</label>
+                        <select name="employment-type" id="employment-type" class="form-control">
+                          {% for employment_type in employment_types %}
+                            <option value="{{employment_type.employee_type_name}}" {% if employee.employment_type == employment_type.name %}selected{% endif %}>{{employment_type.employee_type_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="department">Departamento</label>
+                        <select name="department" id="department">
+                          {% for department in departments %}
+                            <option value="{{department.department_name}}" {% if employee.department == department.name %}selected{% endif %}>{{department.department_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="designation">Puesto</label>
+                        <select name="designation" id="designation">
+                          {% for designation in designations %}
+                            <option value="{{designation.designation_name}}" {% if employee.designation == designation.name %}selected{% endif %}>{{designation.designation_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="frappe-control">
+                        <label for="date-of-joining">Fecha de Ingreso</label>
+                        <input type="date" name="date-of-joining" id="date-of-joining" class="form-control" value="{{employee.date_of_joining}}"> 
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-control">
+                        <label for="date-of-leaving">Fecha de Terminación de Contrato</label>
+                        <input type="date" name="date-of-leaving" id="date-of-leaving" class="form-control" value="{{employee.contract_end_date}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="submit" value="Guardar" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

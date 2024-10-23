@@ -1,18 +1,16 @@
 {% extends "employee_portal/templates/base.html" %}
-
-
-
+{% block title %}{{ ("Portal de Empleado") }}{% endblock %}
 {% block page_content %}
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h2>Hola, {{user.first_name}}!</h2><br>
+        <h2>Hola, {{employee.first_name}}!</h2><br>
         <h3>Anuncios Recientes</h3>
         {% if announcements %}
           {% for announcement in announcements%}
           <div class="card">
             {% if announcement.image %}
-              <img src="{{ announcement.image }}" class="card-img-top" alt="...">
+              <img src="{{ announcement.imxage }}" class="card-img-top" alt="...">
             {% endif %}
             <div class="card-body">
               <h5 class="card-title">{{announcement.title}}</h5>

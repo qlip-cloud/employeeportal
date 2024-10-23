@@ -165,8 +165,6 @@ user_data_fields = [
 		"doctype": "{doctype_4}"
 	}
 ]
-
-get_website_user_home_page = "employee_portal.employee_portal.utils.get_website_user_home_page"
 # Authentication and authorization
 # --------------------------------
 
