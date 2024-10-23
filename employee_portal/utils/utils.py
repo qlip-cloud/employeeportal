@@ -12,3 +12,12 @@ def get_modules(context):
     {"name": "Soporte", "url": "/employee_portal/help", "icon": "question-circle"},
   ]
   return context
+
+def get_employee(context):
+  user = frappe.get_doc("User", frappe.session.user)
+  employee = frappe.get_doc("Employee", {"user_id": user.name})
+  if employee:
+    context.employee = employee
+  else:
+    context.employee = user
+  return context

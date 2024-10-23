@@ -1,55 +1,50 @@
 {
  "actions": [],
+ "autoname": "format:BEN-{YYYY}-{####}",
  "creation": "2024-10-04 11:24:08.140779",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "benn_title",
-  "benn_desc",
+  "title",
+  "description",
   "column",
-  "benn_appli",
-  "benn_form",
-  "benn_attach"
+  "form",
+  "attachment"
  ],
  "fields": [
-  {
-   "fieldname": "benn_title",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Title",
-   "reqd": 1
-  },
-  {
-   "fieldname": "benn_desc",
-   "fieldtype": "Text",
-   "in_list_view": 1,
-   "label": "Description",
-   "reqd": 1
-  },
   {
    "fieldname": "column",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "benn_attach",
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "T\u00edtulo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Descripci\u00f3n",
+   "reqd": 1
+  },
+  {
+   "fieldname": "form",
+   "fieldtype": "Data",
+   "label": "Formulario de Aplicaci\u00f3n"
+  },
+  {
+   "fieldname": "attachment",
    "fieldtype": "Attach",
-   "label": "Attachments"
-  },
-  {
-   "fieldname": "benn_appli",
-   "fieldtype": "Data",
-   "label": "Application"
-  },
-  {
-   "fieldname": "benn_form",
-   "fieldtype": "Data",
-   "label": "Form "
+   "label": "Adjuntos"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-04 11:34:08.476016",
+ "modified": "2024-10-23 16:50:31.611578",
  "modified_by": "Administrator",
  "module": "Employee Portal",
  "name": "Employee Benefit",
