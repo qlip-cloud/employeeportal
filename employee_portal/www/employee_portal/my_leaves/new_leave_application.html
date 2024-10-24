@@ -1,0 +1,96 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/my_profile.css">
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+{% block title %}{{ ("Nueva Solicitud de Permiso") }}{% endblock %}
+{% block page_content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h2>
+            Nueva Solicitud de Permiso
+          </h2>
+          <form action="/api/method/employee_portal.new_leave_application" method="post">
+              <div class="frappe-card">
+                <h3>Información del Permiso</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="employee-name">Nombre del Empleado</label>
+                      <input type="text" id="employee-name" name="employee_name" class="form-control" value="{{ employee.employee_name }}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="leave-type">Tipo de Permiso</label>
+                      <select id="leave-type" name="leave_type" class="form-control">
+                        {% for leave_type in leave_types %}
+                          <option value="{{ leave_type.name }}">{{ leave_type.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="from-date">Desde</label>
+                      <input type="date" id="from-date" name="from_date" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="to-date">Hasta</label>
+                      <input type="date" id="to-date" name="to_date" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="half-day">Medio Día</label>
+                      <input type="checkbox" id="half-day" name="half_day" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="reason">Motivo del Permiso</label>
+                      <textarea id="reason" name="reason" class="form-control" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="frappe-card">
+                <h3>Información de Aprobación</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="leave-approver">Aprobador del Permiso</label>
+                      <select id="leave-approver" name="leave_approver" class="form-control">
+                        {% for approver in approvers %}
+                          <option value="{{ approver.name }}">{{ approver.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="posting-date">Fecha de Presentación</label>
+                      <input type="date" id="posting-date" name="posting_date" class="form-control" value="{{ frappe.utils.nowdate() }}" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 text-right">
+                  <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
+                </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

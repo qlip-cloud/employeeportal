@@ -172,6 +172,6 @@ user_data_fields = [
 # 	"employee_portal.auth.validate"
 # ]
 
-#website_route_rules = [
-#    {"from_route": "/employee_info", "to_route": "employee_info"},
-#]
+website_route_rules = [
+    {"from_route": "/leave-application/<name>", "to_route": "leave_details"}
+]

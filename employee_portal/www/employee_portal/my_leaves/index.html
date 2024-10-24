@@ -1,0 +1,60 @@
+{% extends "employee_portal/templates/base.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/my_leaves.css">
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+
+{% block title %}{{ ("Mis Permisos/Ausencias") }}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Mis Permisos/Ausencias</h2>
+      
+      <!-- Botón para crear una nueva solicitud -->
+      <div class="row">
+        <div class="col-md-12 text-right"> 
+            <a href="my_leaves/new_leave_application" class="btn btn-primary mb-4">Crear Nueva Solicitud</a>
+        </div>
+      </div>
+      
+      <!-- Verifica si hay solicitudes -->
+      {% if leaves %}
+        <!-- Tabla con las solicitudes de permisos -->
+        <table class="table table-bordered frappe-list">
+          <thead>
+            <tr>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Tipo de Permiso</th>
+              <th>Estado</th>
+              <th>Motivo</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for leave in leaves %}
+            <tr>
+              <td>{{ leave.from_date }}</td>
+              <td>{{ leave.to_date }}</td>
+              <td>{{ leave.leave_type }}</td>
+              <td>{{ leave.status }}</td>
+              <td>{{ leave.reason }}</td>
+              <td>
+                <!-- Enlace para ver los detalles de la solicitud -->
+                <a href="/leave-application/{{ leave.name }}" class="btn btn-info btn-sm">Ver</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <!-- Mensaje si no hay solicitudes -->
+        <p class="text-center">No has hecho ninguna solicitud de permiso o ausencia.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

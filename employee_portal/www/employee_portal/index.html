@@ -8,7 +8,7 @@
         <h3>Anuncios Recientes</h3>
         {% if announcements %}
           {% for announcement in announcements%}
-          <div class="frappe-card">
+          <div class="frappe-card mb-5">
             {% if announcement.image %}
               <img src="{{ announcement.image }}" class="card-img-top" alt="...">
             {% endif %}
