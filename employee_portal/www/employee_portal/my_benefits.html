@@ -1,6 +1,6 @@
 {% extends "employee_portal/templates/base.html" %}
 {% block style %}
-<link rel="stylesheet" href="/assets/employee_portal/css/my_benefits.css">
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
 {% endblock %}
 {% block title %}{{ ("Mis Beneficios") }}{% endblock %}
 {% block page_content %}
@@ -11,11 +11,16 @@
     </div>
     <div class="row">
       {% for benefit in benefits %}
-        <div class="col-md-4">
+        <div class="col-md-4 d-flex h-100">
           <div class="frappe-card">
             <h4>{{ benefit.title }}</h4>
             <p>{{ benefit.description }}</p>
-            <a href="/files/{{ benefit.attachment }}" class="btn btn-primary" download>Descargar Formulario</a>
+            {% if benefit.attachment %} 
+              <a href="/files/{{ benefit.attachment }}" download>Adjuntos</a>
+            {% endif %}
+            {% if benefit.form %}
+              <a href="{{ benefit.form }}" download>Formulario de Solicitud</a>
+            {% endif %}
           </div>
         </div>
         {% if loop.index is divisibleby 3 %}
