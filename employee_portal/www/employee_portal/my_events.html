@@ -1,0 +1,48 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+{% endblock %}
+
+{% block title %}{{ ("Mis Eventos") }}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h2>Calendario de Eventos</h2>
+          <div id="calendar"></div>
+      </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+<script>
+  event_data = []
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',  
+      headerToolbar: {             
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      events: function(fetchInfo, successCallback, failureCallback) {
+        frappe.call({
+          method: "employee_portal.api.get_events", 
+          args: {
+          },
+          callback: function(response) {
+            var events = response.message || [];
+            successCallback(events); 
+          }
+        });
+      },
+      editable: false  
+    });
+
+
+    calendar.render();
+  });
+</script>
+{% endblock %}
