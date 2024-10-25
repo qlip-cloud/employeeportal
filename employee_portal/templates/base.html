@@ -2,21 +2,22 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/employee_portal/css/base.css">
 {% endblock %}
-
 {% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            {% for module in modules %}
-            <div class="card">
-                <div class="card-body">
-                    <a href="{{ module.url }}">
-                        <i class="fa {{ module.icon }} fa-3x"></i>
-                        <h5 class="card-title">{{ module.name }}</h5>
-                    </a>
+            <div class="side-bar d-flex flex-column align-items-center justify-content-center" style="position: sticky; top: 10%; height: 90vh;">
+                {% for module in modules %}
+                <div class="card my-3 active-card" style="width: 100%;">
+                    <div class="card-body" style="padding: 0.25rem;">
+                        <a href="{{ module.url }}" style="text-decoration: none; color: inherit;">
+                            <i class="fa {{ module.icon }} fa-3x mb-2"></i>
+                            <h5 class="card-title">{{ module.name }}</h5>
+                        </a>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         <div class="col-md-9">
             {% block page_content %}
@@ -25,4 +26,5 @@
     </div>
 </div>
 {% endblock %}
+
 
