@@ -1,0 +1,40 @@
+{% extends "employee_portal/templates/base.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+
+{% block title %}{{ ("Documentos y Políticas") }}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Documentos y Políticas</h2>
+      {% if documents %}
+        <table class="table table-bordered frappe-list">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Archivo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for document in documents %}
+            <tr>
+              <td>{{ document.title }}</td>
+              <td>
+                <a href="{{ document.file }}" target="_blank">Ver</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <!-- Mensaje si no hay solicitudes -->
+        <p class="text-center">No has hecho ninguna solicitud de permiso o ausencia.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

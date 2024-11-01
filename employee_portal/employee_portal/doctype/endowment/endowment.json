@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "autoname": "format:DOT-{YYYY}-{####}",
+ "creation": "2024-10-26 20:03:39.792513",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "date",
+  "column",
+  "value",
+  "invoice"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "T\u00edtulo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Valor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Factura",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-26 20:03:39.792513",
+ "modified_by": "Administrator",
+ "module": "Employee Portal",
+ "name": "Endowment",
+ "name_case": "Title Case",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
