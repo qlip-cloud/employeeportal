@@ -2,6 +2,7 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/employee_portal/css/my_leaves.css">
 <link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 {% endblock %}
 
 {% block title %}{{ ("Mis Permisos/Ausencias") }}{% endblock %}
@@ -22,7 +23,7 @@
       <!-- Verifica si hay solicitudes -->
       {% if leaves %}
         <!-- Tabla con las solicitudes de permisos -->
-        <table class="table table-bordered frappe-list">
+        <table class="table table-bordered frappe-list display" id="table-leaves" style="width: 100%;">
           <thead>
             <tr>
               <th>Desde</th>
@@ -56,4 +57,13 @@
     </div>
   </div>
 </div>
+{% endblock %}
+{% block script %}
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+<script src="/assets/employee_portal/js/base.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#table-leaves').DataTable();
+  });
+</script>
 {% endblock %}

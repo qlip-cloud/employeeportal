@@ -13,7 +13,7 @@
               Mis Datos
               <i class="fas fa-edit edit-icon"></i>
             </h2>
-            <form action="" method="post">
+            <form id="employee-form" method="post">
                 <div class="frappe-card">
                   <h3>Información Personal</h3>
                   <div class="row">
@@ -36,12 +36,6 @@
                         <label for="last_name">Apellido</label>
                         <input type="text" name="last_name" id="last_name" class="form-control" value="{{employee.last_name}}">
                       </div>        
-                    </div>
-                    <div class="col-md-6">     
-                      <div class="frappe-control">
-                        <label for="full-name">Nombre Completo</label>
-                        <input type="text" name="full_name" id="full_name" class="form-control" value="{{employee.employee_name}}">
-                      </div>
                     </div>
                   </div>
                   <div class="row">
@@ -94,17 +88,13 @@
                     <div class="col-md-6">
                       <div class="frappe-control">
                         <label for="company">Compañía</label>
-                        <input type="text" name="company" id="company" class="form-control" value="{{employee.company}}">
+                        <input type="text" name="company" id="company" class="form-control" value="{{employee.company}}" readonly>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="frappe-control">
                         <label for="employement-type">Tipo de Empleo</label>
-                        <select name="employment-type" id="employment-type" class="form-control">
-                          {% for employment_type in employment_types %}
-                            <option value="{{employment_type.employee_type_name}}" {% if employee.employment_type == employment_type.name %}selected{% endif %}>{{employment_type.employee_type_name}}</option>
-                          {% endfor %}
-                        </select>
+                        <input type="text" name="employment-type" id="employment-type" class="form-control" value="{{employee.employment_type}}" readonly>
                       </div>
                     </div>
                   </div>
@@ -112,21 +102,13 @@
                     <div class="col-md-6">
                       <div class="frappe-control">
                         <label for="department">Departamento</label>
-                        <select name="department" id="department" class="form-control">
-                          {% for department in departments %}
-                            <option value="{{department.department_name}}" {% if employee.department == department.name %}selected{% endif %}>{{department.department_name}}</option>
-                          {% endfor %}
-                        </select>
+                        <input type="text" name="department" id="department" class="form-control" value="{{employee.department}}" readonly>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="frappe-control">
                         <label for="designation">Puesto</label>
-                        <select name="designation" id="designation" class="form-control">
-                          {% for designation in designations %}
-                            <option value="{{designation.designation_name}}" {% if employee.designation == designation.name %}selected{% endif %}>{{designation.designation_name}}</option>
-                          {% endfor %}
-                        </select>
+                        <input type="text" name="designation" id="designation" class="form-control" value="{{employee.designation}}" readonly>
                       </div>
                     </div>
                   </div>
@@ -134,13 +116,13 @@
                     <div class="col-md-6">
                       <div class="frappe-control">
                         <label for="date-of-joining">Fecha de Ingreso</label>
-                        <input type="date" name="date-of-joining" id="date-of-joining" class="form-control" value="{{employee.date_of_joining}}"> 
+                        <input type="date" name="date-of-joining" id="date-of-joining" class="form-control" value="{{employee.date_of_joining}}" readonly> 
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="frappe-control">
                         <label for="date-of-leaving">Fecha de Terminación de Contrato</label>
-                        <input type="date" name="date-of-leaving" id="date-of-leaving" class="form-control" value="{{employee.contract_end_date}}">
+                        <input type="date" name="date-of-leaving" id="date-of-leaving" class="form-control" value="{{employee.contract_end_date}}" readonly>
                       </div>
                     </div>
                   </div>

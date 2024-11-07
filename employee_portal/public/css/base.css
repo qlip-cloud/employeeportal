@@ -1,6 +1,7 @@
 .card {
     border: none;
     transition: transform 0.2s;
+    padding: 0% !important;
 }
 
 .card:hover {

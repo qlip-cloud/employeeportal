@@ -1,0 +1,65 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/my_profile.css">
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+{% block title %}Nuevo Comprobante de Dotación{% endblock %}
+{% block page_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Nuevo Comprobante de Dotación</h2>
+      <form id="endowment-form" method="post" enctype="multipart/form-data" onsubmit="false">
+        <div class="frappe-card">
+          <h3>Información del Permiso</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="frappe-control">
+                <label for="employee">Nombre del Empleado</label>
+                <input type="text" id="employee" name="employee" class="form-control" value="{{ employee.employee_name }}" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="frappe-control">
+                <label for="title">Título*</label>
+                <input type="text" name="title" class="form-control" id="title">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="frappe-control">
+                <label for="value">Valor*</label>
+                <input type="number" id="value" name="value" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="frappe-control">
+                <label for="date">Fecha*</label>
+                <input type="date" id="date" name="date" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="frappe-control">
+                <label for="invoice">Factura*</label>
+                <input type="file" id="invoice" name="invoice" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <input type="submit" value="Enviar Comprobante" class="btn btn-primary">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/assets/employee_portal/js/new_endowment.js"></script>
+<script src="/assets/employee_portal/js/base.js"></script>
+{% endblock %}
