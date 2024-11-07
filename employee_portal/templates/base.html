@@ -6,12 +6,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            <div class="side-bar d-flex flex-column align-items-center justify-content-center" style="position: sticky; top: 10%; height: 90vh;">
+            <div class="side-bar d-flex flex-column justify-content-center" 
+                 style="position: sticky; top: 10%;">
                 {% for module in modules %}
-                <div class="card my-3 active-card" style="width: 100%;">
-                    <div class="card-body">
+                <div class="card active-card" style="width: 100%;">
+                    <div class="card-body d-flex flex-column ">
                         <a href="{{module.url}}" class="module-link" data-url="{{module.url}}" style="text-decoration: none; color: inherit;">
-                            <i class="fa {{ module.icon }} fa-3x mb-2"></i>
                             <h5 class="card-title">{{ module.name }}</h5>
                         </a>                        
                     </div>
@@ -31,53 +31,7 @@
 {% block script %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.module-link').on('click', function(event) {
-            event.preventDefault();
-            let url = $(this).data('url');
-            $('#dynamic-content').html('<div class="loading-message">Cargando...</div>');
-            $.ajax({
-                url: url,
-                method: 'GET',
-                success: function(response) {
-                    $('#dynamic-content').html($(response).find('#dynamic-content').html());
-                    history.pushState(null, '', url);
-                    
-                    initializeCalendar();
-                },
-                error: function() {
-                    console.error("Error al cargar el contenido.");
-                }
-            });
-        });
-        function initializeCalendar() {
-            var calendarEl = document.getElementById('calendar');
-            if (calendarEl) {
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                    },
-                    events: function(fetchInfo, successCallback, failureCallback) {
-                        frappe.call({
-                            method: "employee_portal.api.get_events",
-                            args: {},
-                            callback: function(response) {
-                                var events = response.message || [];
-                                successCallback(events);
-                            }
-                        });
-                    },
-                    editable: false
-                });
-                calendar.render();
-            }
-        }
-        initializeCalendar();
-    });
-</script>
+<script src="/assets/employee_portal/js/calendar.js"></script>
+<script src="/assets/employee_portal/js/base.js"></script>
 {% endblock %}
 
