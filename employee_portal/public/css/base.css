@@ -1,0 +1,17 @@
+.card {
+    border: none;
+    transition: transform 0.2s;
+    padding: 0% !important;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card i {
+    margin-bottom: 15px;
+}
+.card-title {
+    font-size: 16px;
+    color: #000;
+}

@@ -1,0 +1,278 @@
+{
+ "actions": [],
+ "autoname": "format:EVA-{YYYY}-{####}",
+ "creation": "2024-10-04 13:38:38.499937",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section1",
+  "date",
+  "evaluated",
+  "position",
+  "column",
+  "evaluator",
+  "dept",
+  "section2",
+  "obj1",
+  "obj2",
+  "obj3",
+  "column5",
+  "cumplobj1",
+  "cumplobj2",
+  "cumplobj3",
+  "section3",
+  "comp1",
+  "comp2",
+  "comp3",
+  "column2",
+  "cumplcomp1",
+  "cumplcomp2",
+  "cumplcomp3",
+  "section4",
+  "colab1",
+  "colab2",
+  "colab3",
+  "column3",
+  "cumplcolab1",
+  "cumplcolab2",
+  "cumplcolab3",
+  "section5",
+  "feedback",
+  "column4",
+  "actionplan"
+ ],
+ "fields": [
+  {
+   "fieldname": "section1",
+   "fieldtype": "Section Break",
+   "label": "Informaci\u00f3n General"
+  },
+  {
+   "fieldname": "column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section2",
+   "fieldtype": "Section Break",
+   "label": "Objetivos y Resultados"
+  },
+  {
+   "fieldname": "section3",
+   "fieldtype": "Section Break",
+   "label": "Competencias y Habilidades"
+  },
+  {
+   "fieldname": "column2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section4",
+   "fieldtype": "Section Break",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo"
+  },
+  {
+   "fieldname": "column3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section5",
+   "fieldtype": "Section Break",
+   "label": "Retroalimentaci\u00f3n y Plan de Acci\u00f3n"
+  },
+  {
+   "fieldname": "column4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha",
+   "reqd": 1
+  },
+  {
+   "fieldname": "evaluated",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Evaluado",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "position",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cargo",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "evaluator",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Evaluador",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dept",
+   "fieldtype": "Link",
+   "label": "Departamento",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "obj1",
+   "fieldtype": "Data",
+   "label": "Objetivo y Resultado 1"
+  },
+  {
+   "fieldname": "obj2",
+   "fieldtype": "Data",
+   "label": "Objetivo y Resultado 2"
+  },
+  {
+   "fieldname": "obj3",
+   "fieldtype": "Data",
+   "label": "Objetivo y Resultado 3"
+  },
+  {
+   "fieldname": "cumplobj1",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 1",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "cumplobj2",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 2",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "cumplobj3",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 3",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "comp1",
+   "fieldtype": "Data",
+   "label": "Competencias y Habilidades 1"
+  },
+  {
+   "fieldname": "comp2",
+   "fieldtype": "Data",
+   "label": "Competencias y Habilidades 2"
+  },
+  {
+   "fieldname": "comp3",
+   "fieldtype": "Data",
+   "label": "Competencias y Habilidades 3"
+  },
+  {
+   "fieldname": "cumplcomp1",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 1",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "cumplcomp2",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 2",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "cumplcomp3",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 3",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "colab1",
+   "fieldtype": "Data",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo 1"
+  },
+  {
+   "fieldname": "colab2",
+   "fieldtype": "Data",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo 2"
+  },
+  {
+   "fieldname": "colab3",
+   "fieldtype": "Data",
+   "label": "Colaboraci\u00f3n y Trabajo en Equipo 3"
+  },
+  {
+   "fieldname": "cumplcolab1",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 1",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "cumplcolab2",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 2",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "cumplcolab3",
+   "fieldtype": "Select",
+   "label": "Cumpli\u00f3 3",
+   "options": "S\u00ed\nNo"
+  },
+  {
+   "fieldname": "feedback",
+   "fieldtype": "Text",
+   "label": "Feedback",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actionplan",
+   "fieldtype": "Text",
+   "label": "Plan de Acci\u00f3n",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-30 12:34:10.033468",
+ "modified_by": "Administrator",
+ "module": "Employee Portal",
+ "name": "Performance Review",
+ "name_case": "Title Case",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
