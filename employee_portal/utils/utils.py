@@ -14,17 +14,29 @@ def get_modules(context):
   ]
   return context
 
-def get_employee(context):
-  if frappe.session.user == "Guest":
-      frappe.local.response["type"] = "redirect"
-      frappe.local.response["location"] = "/login" 
-      return
-  user = frappe.get_doc("User", frappe.session.user)
-  employee = frappe.get_doc("Employee", {"user_id": user.name})
+def get_employee_from_user(context, user=None):
+    """
+    Fetches the Employee document linked to the given user.
 
-  if employee:
+    Args:
+        user (str): The user ID (optional). Defaults to the current session user.
+
+    Returns:
+        frappe._dict: The Employee document if found.
+
+    Raises:
+        frappe.PermissionError: If the user is not logged in or not linked to an employee.
+    """
+    if not user:
+      user = frappe.session.user
+
+    if user == "Guest":
+      raise frappe.PermissionError("Log in to access this page.")
+
+    try:
+      user_doc = frappe.get_doc("User", user)
+      employee = frappe.get_doc("Employee", {"user_id": user_doc.name})
       context.employee = employee
-  else:
-      frappe.throw(_("You do not have the necessary permissions to access this page."), frappe.PermissionError)
-
-  return context
+      return context
+    except frappe.DoesNotExistError:
+      raise frappe.PermissionError("You are not authorized to access this page.")

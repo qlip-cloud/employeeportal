@@ -14,7 +14,13 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/employee_portal/css/employee_portal.css"
-# app_include_js = "/assets/employee_portal/js/employee_portal.js"
+app_include_js = [
+  "/assets/employee_portal/js/base.js",
+	"/assets/employee_portal/js/my_profile.js",
+	"/assets/employee_portal/js/calendar.js",
+	"/assets/employee_portal/js/jquery-ui.js",
+	"/assets/employee_portal/js/new_endowment.js",
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/employee_portal/css/employee_portal.css"
@@ -126,6 +132,9 @@ app_license = "MIT"
 # Overriding Methods
 # ------------------------------
 #
+# override_whitelisted_methods = {
+# 	"frappe.desk.doctype.event.event.get_events": "employee_portal.event.get_events"
+# }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -168,7 +177,3 @@ user_data_fields = [
 # auth_hooks = [
 # 	"employee_portal.auth.validate"
 # ]
-
-website_route_rules = [
-    {"from_route": "/leave-application/<name>", "to_route": "leave_details"}
-]
