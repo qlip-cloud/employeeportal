@@ -42,4 +42,9 @@
 {% block script %}
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script src="/assets/employee_portal/js/base.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#table-documents').DataTable();
+  });
+</script>
 {% endblock %}

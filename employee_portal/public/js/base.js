@@ -34,8 +34,6 @@ $(document).ready(function () {
                         initializeEmployeeForm();
                     }
                 }
-
-                history.pushState(null, '', url);
             },
             error: function () {
                 console.error("Error al cargar el contenido.");
@@ -44,8 +42,3 @@ $(document).ready(function () {
     });
     
 });
-
-new DataTable('#table-endowments');
-new DataTable('#table-documents');
-new DataTable('#table-evaluations');
-new DataTable('#table-leaves');

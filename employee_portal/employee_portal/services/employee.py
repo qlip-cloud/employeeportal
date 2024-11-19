@@ -10,9 +10,9 @@ def update_employee_info(**kwargs):
     employee.last_name = kwargs.get("last_name")
     employee.date_of_birth = kwargs.get("dob")
     employee.gender = kwargs.get("gender")
-    employee.employee_number = kwargs.get("employee-number")
-    employee.emergency_phone_number = kwargs.get("emergency-phone")
-    employee.person_to_be_contacted = kwargs.get("emergency-contact")
+    employee.employee_number = kwargs.get("employee_number")
+    employee.emergency_phone_number = kwargs.get("emergency_phone")
+    employee.person_to_be_contacted = kwargs.get("emergency_contact")
   except Exception as e:
     frappe.throw(_("Error: {0}").format(e))
   else:
