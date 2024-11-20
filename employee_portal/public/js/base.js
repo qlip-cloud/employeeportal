@@ -34,6 +34,7 @@ $(document).ready(function () {
                         initializeEmployeeForm();
                     }
                 }
+                history.pushState(null, '', url);
             },
             error: function () {
                 console.error("Error al cargar el contenido.");

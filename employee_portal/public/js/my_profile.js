@@ -35,7 +35,7 @@ document.getElementById("employee-form").addEventListener("submit", function (ev
         emergency_contact: emergencyContact
     };
 
-    fetch('/api/method/employee_portal.services.employee.update_employee_info', {
+    fetch('/api/method/employee_portal.employee_portal.services.employee.update_employee_info', {
         method: 'POST',
         headers: {
             'X-Frappe-CSRF-Token': csrf_token
