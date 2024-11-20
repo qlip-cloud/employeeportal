@@ -10,6 +10,11 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Mis Evaluaciones de Desempeño</h2>
+      <div class="row">
+        <div class="col-md-12 text-right"> 
+            <a href="my_evaluations/new_evaluation" class="module-link" data-url="my_evaluations/new_evaluation" class="btn btn-primary mb-4">Crear Nueva Evaluación</a>
+        </div>
+      </div>
       {% if evaluations %}
         <table id="evaluationsTable" class="table table-bordered frappe-list">
           <thead>
@@ -42,36 +47,4 @@
 {% block script %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-<script>
-  $(document).ready(function() {
-    var table = $('#evaluationsTable').DataTable();
-
-    $('#evaluationsTable tbody').on('click', 'tr', function () {
-      var tr = $(this);
-      var row = table.row(tr);
-
-      if (row.child.isShown()) {
-        row.child.hide();
-        tr.removeClass('shown');
-      } else {
-        var evaluationId = tr.data('id');
-        $.ajax({
-          url: '/api/method/employee_portal.my_module.get_evaluation_details',
-          method: 'GET',
-          data: { evaluation_id: evaluationId },
-          success: function(data) {
-            var details = '<div><strong>Detalles de Evaluación:</strong><br>' +
-                          'Comentarios: ' + data.message.feedback + '<br>' + 
-                          'Puntuación: ' + data.message.actionplan + '</div>';
-            row.child(details).show();
-            tr.addClass('shown');
-          },
-          error: function() {
-            alert('Error al cargar los detalles de la evaluación.');
-          }
-        });
-      }
-    });
-  });
-</script>
 {% endblock %}
