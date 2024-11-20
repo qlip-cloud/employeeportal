@@ -14,13 +14,13 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/employee_portal/css/employee_portal.css"
-app_include_js = [
-  "/assets/employee_portal/js/base.js",
-	"/assets/employee_portal/js/my_profile.js",
-	"/assets/employee_portal/js/calendar.js",
-	"/assets/employee_portal/js/jquery-ui.js",
-	"/assets/employee_portal/js/new_endowment.js",
-]
+#app_include_js = [
+#  "/assets/employee_portal/js/base.js",
+#	"/assets/employee_portal/js/my_profile.js",
+#	"/assets/employee_portal/js/calendar.js",
+#	"/assets/employee_portal/js/jquery-ui.js",
+#	"/assets/employee_portal/js/new_endowment.js",
+#]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/employee_portal/css/employee_portal.css"
