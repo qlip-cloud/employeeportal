@@ -16,7 +16,7 @@ frappe.ready(() => {
       if (file) {
           const uploadData = new FormData();
           uploadData.append('file', file);
-          uploadData.append('is_private', 0); // Opcional: define si el archivo es privado
+          uploadData.append('is_private', 0); 
 
           try {
               const fileResponse = await fetch('/api/method/upload_file', {
@@ -30,7 +30,7 @@ frappe.ready(() => {
               if (!fileResponse.ok) {
                   const errorResponse = await fileResponse.json();
                   alert('Error al subir el archivo: ' + (errorResponse.message || 'Error desconocido'));
-                  return; // Detener el proceso si hay un error al subir el archivo
+                  return; 
               }
 
               const fileData = await fileResponse.json();
@@ -41,12 +41,12 @@ frappe.ready(() => {
           } catch (error) {
               alert(error.message);
               console.error('Error en la subida del archivo:', error);
-              return; // Detener el proceso si hay un error al subir el archivo
+              return; 
           }
       }
 
       // Agregar el doctype al formData
-      formData.append('doctype', 'Endowment'); // Asegúrate de agregar el doctype
+      formData.append('doctype', 'Endowment'); 
 
       // Depurar el contenido del formData
       for (const [key, value] of formData.entries()) {
@@ -59,7 +59,7 @@ frappe.ready(() => {
               headers: {
                   'X-Frappe-CSRF-Token': frappe.csrf_token,
               },
-              body: formData // Enviar el FormData directamente
+              body: formData 
           });
 
           if (response.ok) {
@@ -68,7 +68,7 @@ frappe.ready(() => {
               window.location.href = '/employee_portal/endowment';
           } else {
               const error = await response.json();
-              console.error('Error en la respuesta del servidor:', error); // Log del error
+              console.error('Error en la respuesta del servidor:', error);
               alert('Error al agregar el comprobante: ' + (error.message || 'Error desconocido'));
           }
       } catch (err) {

@@ -14,6 +14,9 @@ def get_context(context):
     employee = context.employee
     context.employee = employee
     csfr_token = frappe.sessions.get_csrf_token()
+    print('Token CSFR: ', csfr_token)
     frappe.db.commit()
-    context.csrf_token = csfr_token
+    context.update({
+        "csrf_token": csfr_token,
+        "no_cache": 1})
     return context
