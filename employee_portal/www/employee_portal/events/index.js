@@ -1,4 +1,5 @@
-function initializeCalendar() {
+$(document).ready(function() {
+  console.log('Employee Portal Events');
   var calendarEl = document.getElementById('calendar');
   if (calendarEl) {
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -10,7 +11,7 @@ function initializeCalendar() {
           },
           events: function(fetchInfo, successCallback, failureCallback) {
               frappe.call({
-                  method: "employee_portal.api.get_events",
+                  method: "employee_portal.www.employee_portal.events.index.get_events",
                   args: {},
                   callback: function(response) {
                       var events = response.message || [];
@@ -22,5 +23,4 @@ function initializeCalendar() {
       });
       calendar.render();
   }
-}
-initializeCalendar();
+} );
