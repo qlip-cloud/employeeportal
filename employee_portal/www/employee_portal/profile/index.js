@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-  console.log('Frappe ready');
   $('#profile-save').off('click').on('click', function() {
     var employee_id = $('#employee-name').val();
     var data = {
@@ -13,6 +11,14 @@ $(document).ready(function() {
       'emergency_phone': $('#emergency-phone').val(),
       'emergency_contact': $('#emergency-contact').val(),
     };
+    if (!data.first_name || !data.last_name || !data.dob || !data.gender) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'Por favor, completa los campos obligatorios',
+        indicator: 'red',
+      });
+      return;
+    }
     frappe.call({
       method: 'employee_portal.www.employee_portal.profile.index.save_profile',
       args: {
@@ -21,10 +27,22 @@ $(document).ready(function() {
       },
       callback: function(r) {
         response = r.message;
-        if (response.success) {
-          frappe.msgprint('Profile saved successfully');
+        console.log(response);
+        if (response.status == 'success') {
+          frappe.msgprint(
+            {
+              title: 'Notificación',
+              message: 'Tu perfil ha sido actualizado',
+              indicator: 'green',
+            }
+          );
         } else {
-          frappe.msgprint('Error saving profile');
+          frappe.msgprint({
+            title: 'Error',
+            message: response.error,
+            indicator: 'red',
+          }
+          );
           console.error(response.error);
         }
       }
