@@ -25,16 +25,9 @@ $(document).ready(function () {
                 $(response).find('script:not([src])').each(function () {
                     $.globalEval(this.textContent || this.innerText);
                 });
-                if (url.includes('my_profile')) {
-                    if (typeof initializeEmployeeForm === 'function') {
-                        initializeEmployeeForm();
-                    }
-                }
 
-                // Actualizar la URL sin recargar la página
                 history.pushState(null, '', url);
 
-                // Volver a vincular los eventos para los submódulos después de la carga
                 attachModuleEvents();
             },
             error: function () {
@@ -51,7 +44,6 @@ $(document).ready(function () {
             loadModule(url);
         });
     }
-
-    // Enlazar eventos iniciales
+    
     attachModuleEvents();
 });
