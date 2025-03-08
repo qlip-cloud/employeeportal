@@ -13,16 +13,13 @@
     <div class="col-md-12">
       <h2>Mis Permisos/Ausencias</h2>
       
-      <!-- Botón para crear una nueva solicitud -->
       <div class="row">
         <div class="col-md-12 text-right"> 
             <a href="leave_application/new" data-url="leave_application/new" class="module-link btn btn-primary mb-4">Crear Nueva Solicitud</a>
         </div>
       </div>
       
-      <!-- Verifica si hay solicitudes -->
       {% if leaves %}
-        <!-- Tabla con las solicitudes de permisos -->
         <table class="table table-bordered frappe-list display" id="table-leaves" style="width: 100%;">
           <thead>
             <tr>
@@ -43,7 +40,6 @@
               <td>{{ leave.status }}</td>
               <td>{{ leave.reason }}</td>
               <td>
-                <!-- Enlace para ver los detalles de la solicitud -->
                 <a href="/leave-application/{{ leave.name }}" class="btn btn-info btn-sm">Ver</a>
               </td>
             </tr>
@@ -51,7 +47,6 @@
           </tbody>
         </table>
       {% else %}
-        <!-- Mensaje si no hay solicitudes -->
         <p class="text-center">No has hecho ninguna solicitud de permiso o ausencia.</p>
       {% endif %}
     </div>
