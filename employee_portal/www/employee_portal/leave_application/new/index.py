@@ -14,18 +14,24 @@ def send_application(data):
   try:
     if isinstance(data, str):
       data = frappe.parse_json(data)
-    if not data.get("leave_type"):
-      raise Exception("Leave Type is required")
-    if not data.get("from_date"):
-      raise Exception("From Date is required")
-    if not data.get("to_date"):
-      raise Exception("To Date is required")
-    
-    save_application(data)
-    return {"status": "success", "message": "Leave Application saved successfully"}
+
+    required_fields = ["leave_type", "from_date", "to_date", "department"]
+    for field in required_fields:
+      if not data.get(field):
+        raise Exception(f"{field.replace('_', ' ').title()} is required")
+
+    response = save_application(data) 
+
+    if response.get("status") == "error":
+      frappe.log_error(f"Error saving leave application: {response.get('message')}")
+      return {"status": "error", "message": response.get("message")}
+
+    return {"status": "success", "message": "Leave Application saved successfully :)"}
+
   except Exception as e:
+    frappe.log_error(f"Exception in send_application: {str(e)}")
     return {"status": "error", "message": str(e)}
-    
+
 
     
 

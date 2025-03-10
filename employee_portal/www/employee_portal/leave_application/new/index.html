@@ -25,6 +25,9 @@
               <h3>Información General</h3>
               <input type="hidden" id="employee-name" value="{{ employee.name }}">
               <input type="hidden" id="employee" value="{{employee}}">
+              <input type="hidden" id="leave-approver" value="{{ employee.leave_approver }}">
+              <input type="hidden" name="company" value="{{ employee.company }}">
+              <input type="hidden" id="leave-status" name="leave-status" value="Open">
               <div class="row">
                 <div class="col-md-6">
                   <div class="frappe-control">
@@ -62,12 +65,6 @@
                         <option value="{{ leave_type.name }}">{{ leave_type.name }}</option>
                       {% endfor %}
                     </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="frappe-control">
-                    <label for="leave-status">Estado</label>
-                    <input type="text" id="leave-status" name="leave_status" class="form-control" value="Pendiente" readonly>
                   </div>
                 </div>
               </div>

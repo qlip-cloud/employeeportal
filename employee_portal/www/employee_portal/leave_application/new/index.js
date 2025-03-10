@@ -2,15 +2,17 @@ $(document).ready(function() {
   $('#send-application').off('click').on('click', function() {
     var employee_id = $('#employee-name').val();
     var data = {
-      'employee' : $('#employee').val(),
-      'posting_date' : $('#posting-date').val(),
-      'department' : $('#department').val(),
+      'employee' : $('#employee-name').val(),
       'employee_name' : $('#employee-full-name').val(),
+      'company' : $('#company').val(),
+      'department' : $('#department').val(),
+      'leave_approver' : $('#leave-approver').val(),
       'leave_type' : $('#leave-type').val(),
-      'status' : $('#leave-status').val(),
+      'posting_date' : $('#posting-date').val(),
       'from_date' : $('#from-datetime').val(),
       'to_date' : $('#to-datetime').val(),
       'reason' : $('#reason').val(),
+      'status' : $('#leave-status').val(),
       
     };
     if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.leave_type || !data.status || !data.from_date || !data.to_date || !data.reason) {
@@ -29,7 +31,6 @@ $(document).ready(function() {
       },
       callback: function(r) {
         response = r.message;
-        console.log(response);
         if (response.status == 'success') {
           frappe.msgprint(
             {
@@ -38,6 +39,7 @@ $(document).ready(function() {
               indicator: 'green',
             }
           );
+        loadModule('/employee_portal/leave_application');
         } else {
           frappe.msgprint({
             title: 'Error',
@@ -45,10 +47,19 @@ $(document).ready(function() {
             indicator: 'red',
           }
           );
-          console.error(response.error);
         }
       }
     });
   } );
-
+  function loadModule(url) {
+    console.log("Cargando contenido desde: ", url);
+    $('#dynamic-content').fadeOut(200, function() {
+      $(this).load(url + ' #dynamic-content > *', function(response, status, xhr) {
+        if (status == "error") {
+        } else {
+          $(this).fadeIn(200);
+        }
+      });
+    });
+  }
 } );
