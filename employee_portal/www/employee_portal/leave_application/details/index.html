@@ -1,120 +1,137 @@
 {% extends "employee_portal/templates/base.html" %}
 {% block style %}
-<link rel="stylesheet" href="/assets/employee_portal/css/my_profile.css">
 <link rel="stylesheet" href="/assets/employee_portal/css/base.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
-{% block title %}{{ ("Detalles de Solicitud de Permiso") }}{% endblock %}
-{% block page_content %} 
+{% block title %}{{ ("Detalles de la Solicitud") }}{% endblock %}
+{% block page_content %}
+<style>
+  .frappe-card{
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+  .frappe-control {
+    margin-bottom: 20px;
+  }
+</style>
 <div class="container">
   <div class="row">
       <div class="col-md-12">
           <h2>
-            Detalles de Solicitud de Permiso
+            Información de la Solicitud de Permiso {{ leave.name}}
           </h2>
-          <div class="frappe-card">
-            <h3>Información de la Solicitud</h3>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="employee-name">Nombre del Empleado</label>
-                  <input type="text" id="employee-name" class="form-control" value="{{ leave.employee_name }}" readonly>
+            <div class="frappe-card">
+              <h3>Información General</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="posting-date">Fecha de Solicitud</label>
+                    <input type="date" id="posting-date" name="posting_date" class="form-control" value="{{ leave.posting_date }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="department">Proceso / Departamento</label>
+                    <input type="text" id="department" name="employee_department" class="form-control" value="{{ employee.department }}" readonly>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="leave-type">Tipo de Permiso</label>
-                  <input type="text" id="leave-type" class="form-control" value="{{ leave.leave_type }}" readonly>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="employee-full-name">Nombre del Empleado</label>
+                    <input type="text" id="employee-full-name" name="employee_name" class="form-control" value="{{ employee.employee_name }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="employee-id">ID del Empleado</label>
+                    <input type="text" id="employee-id" name="employee_id" class="form-control" value="{{ employee.name }}" readonly>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="from-date">Desde</label>
-                  <input type="date" id="from-date" class="form-control" value="{{ leave.from_date }}" readonly>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="to-date">Hasta</label>
-                  <input type="date" id="to-date" class="form-control" value="{{ leave.to_date }}" readonly>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="total-leave-days">Total de Días de Permiso</label>
-                  <input type="text" id="total-leave-days" class="form-control" value="{{ leave.total_leave_days }}" readonly>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="leave-balance">Balance de Permiso Antes de la Solicitud</label>
-                  <input type="text" id="leave-balance" class="form-control" value="{{ leave.leave_balance_before_application }}" readonly>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="leave-type">Tipo y Causa del Permiso</label>
+                    <input type="text" name="leave-type" id="leave-type" class="form-control" value="{{ leave.leave_type }}" readonly>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="half-day">Medio Día</label>
-                  <input type="checkbox" id="half-day" class="form-control" {% if leave.half_day %}checked{% endif %} disabled>
+            <div class="frappe-card">
+              <h3>Tiempo Solicitado</h3>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="frappe-control">
+                          <label for="from-datetime">Desde</label>
+                          <input type="datetime-local" id="from-datetime" name="from_datetime" class="form-control" value="{{ leave.from_datetime }}" readonly>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="frappe-control">
+                          <label for="to-datetime">Hasta</label>
+                          <input type="datetime-local" id="to-datetime" name="to_datetime" class="form-control" value="{{ leave.to_datetime }}" readonly>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="total-days">Total de Días</label>
+                    <input type="text" id="total-days" name="total_days" class="form-control" value="{{ leave.total_leave_days }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="total-hours">Total de Horas</label>
+                    <input type="text" id="total-hours" name="total_hours" class="form-control" value="{{ leave.total_leave_hours }}" readonly>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="reason">Motivo del Permiso</label>
-                  <textarea id="reason" class="form-control" rows="3" readonly>{{ leave.reason }}</textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="frappe-card">
-            <h3>Información de Aprobación</h3>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="approver">Aprobador</label>
-                  <input type="text" id="approver" class="form-control" value="{{ leave.leave_approver }}" readonly>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="posting-date">Fecha de Presentación</label>
-                  <input type="date" id="posting-date" class="form-control" value="{{ leave.posting_date }}" readonly>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="status">Estado de la Solicitud</label>
-                  <input type="text" id="status" class="form-control" value="{{ leave.status }}" readonly>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="comments">Comentarios</label>
-                  <textarea id="comments" class="form-control" rows="3" readonly>{{ leave.comments }}</textarea>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="frappe-control">
+                    <label for="reason">Motivo / Observaciones del Empleado</label>
+                    <textarea id="reason" name="reason" class="form-control" rows="3"></textarea>
+                  </div>
                 </div>
               </div>
             </div>
-            {% if leave.attachment %}
-            <div class="row">
-              <div class="col-md-6">
-                <div class="frappe-control">
-                  <label for="attachment">Adjunto</label>
-                  <a href="/files/{{ leave.attachment }}" download class="btn btn-info btn-sm">Descargar Adjunto</a>
+            
+            <div class="frappe-card">
+              <h3>Decisión Sobre la Solicitud</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="status">Estado de la Solicitud</label>
+                    <input type="text" id="status" name="status" class="form-control" value="{{ leave.status }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="with-pay">Con Goce de Salario</label>
+                    <input type="text" id="with-pay" name="with_pay" class="form-control" value="{{ leave.with }}" readonly>
+                  </div>
                 </div>
               </div>
+              {% if leave.status == "Approved" %}
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="approved-by">Aprobado por</label>
+                      <input type="text" id="approved-by" name="approved_by" class="form-control" value="{{ leave.approved_by }}" readonly>
+                    </div>
+                  </div>
+              {% endif %}
             </div>
-            {% endif %}
-          </div>
+            <div class="row">
+              <div class="col-md-12 text-right"> 
+                <a href="/employee_portal/leave_application/" data-url="/employee_portal/leave_application/" class="module-link btn btn-primary">Listo</a>
+              </div>
+            </div>  
       </div>
   </div>
 </div>
-
 {% endblock %}
