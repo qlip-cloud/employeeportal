@@ -2,7 +2,7 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/employee_portal/css/base.css">
 {% endblock %}
-{% block title %}{{ ("Nueva Solicitud de Permiso") }}{% endblock %}
+{% block title %}{{ ("Nueva Solicitud de Vacaciones") }}{% endblock %}
 {% block page_content %}
 <style>
   .frappe-card {
@@ -20,7 +20,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2>
-        Nueva Solicitud de Permiso
+        Nueva Solicitud de Vacaciones
       </h2>
       <div class="frappe-card">
         <h3>Información General</h3>
@@ -64,11 +64,11 @@
         <div class="row">
           <div class="col-md-6">
             <div class="frappe-control">
-              <label for="leave-type">Tipo de Permiso</label>
-              <select id="leave-type" name="leave_type" class="form-control">
-                {% for leave_type in leave_types %}
-                <option value="{{ leave_type.name }}">{{ leave_type.name }}</option>
-                {% endfor %}
+              <label for="replacement">Suplente</label>
+              <select name="replacement" id="replacement" class="form-control">
+                {% for emp in employees %}
+                <option value="{{ emp.name }}">{{ emp.employee_name }}</option>
+                {% endfor %}  
               </select>
             </div>
           </div>
@@ -93,7 +93,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="frappe-control">
-              <label for="description">Motivo / Observaciones del Empleado</label>
+              <label for="description">Observaciones del Empleado</label>
               <textarea id="description" name="description" class="form-control" rows="3"></textarea>
             </div>
           </div>

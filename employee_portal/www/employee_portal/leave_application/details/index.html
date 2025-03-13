@@ -66,13 +66,13 @@
                   <div class="col-md-6">
                       <div class="frappe-control">
                           <label for="from-datetime">Desde</label>
-                          <input type="datetime-local" id="from-datetime" name="from_datetime" class="form-control" value="{{ leave.from_datetime }}" readonly>
+                          <input type="datetime-local" id="from-datetime" name="from_datetime" class="form-control" value="{{ leave.from_date }}" readonly>
                       </div>
                   </div>
                   <div class="col-md-6">
                       <div class="frappe-control">
                           <label for="to-datetime">Hasta</label>
-                          <input type="datetime-local" id="to-datetime" name="to_datetime" class="form-control" value="{{ leave.to_datetime }}" readonly>
+                          <input type="datetime-local" id="to-datetime" name="to_datetime" class="form-control" value="{{ leave.to_date }}" readonly>
                       </div>
                   </div>
               </div>
@@ -93,8 +93,8 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="frappe-control">
-                    <label for="reason">Motivo / Observaciones del Empleado</label>
-                    <textarea id="reason" name="reason" class="form-control" rows="3"></textarea>
+                    <label for="description">Motivo / Observaciones del Empleado</label>
+                    <textarea id="description" name="description" class="form-control" rows="3">{{leave.description}}</textarea>
                   </div>
                 </div>
               </div>
@@ -107,12 +107,6 @@
                   <div class="frappe-control">
                     <label for="status">Estado de la Solicitud</label>
                     <input type="text" id="status" name="status" class="form-control" value="{{ leave.status }}" readonly>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="frappe-control">
-                    <label for="with-pay">Con Goce de Salario</label>
-                    <input type="text" id="with-pay" name="with_pay" class="form-control" value="{{ leave.with }}" readonly>
                   </div>
                 </div>
               </div>

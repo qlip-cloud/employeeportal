@@ -6,9 +6,10 @@ def get_modules(context):
     {"name": "Mis Datos", "url": "/employee_portal/profile"},
     {"name": "Mis Eventos", "url": "/employee_portal/events"},
     {"name": "Mis Permisos/Ausencias", "url": "/employee_portal/leave_application"},
+    {"name": "Mis Vacaciones", "url": "/employee_portal/vacations"},
+    {"name": "Mi Dotación", "url": "/employee_portal/endowment"},
     {"name": "Mis Beneficios", "url": "/employee_portal/benefits"},
     {"name": "Mis Evaluaciones", "url": "/employee_portal/performance_review"},
-    {"name": "Dotación", "url": "/employee_portal/endowment"},
     {"name": "Documentos y Políticas", "url": "/employee_portal/documents"},
     {"name": "Soporte", "url": "/employee_portal/help"},
   ]

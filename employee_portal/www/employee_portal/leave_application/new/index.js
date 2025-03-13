@@ -11,11 +11,11 @@ $(document).ready(function() {
       'posting_date' : $('#posting-date').val(),
       'from_date' : $('#from-datetime').val(),
       'to_date' : $('#to-datetime').val(),
-      'reason' : $('#reason').val(),
+      'description' : $('#description').val(),
       'status' : $('#leave-status').val(),
       
     };
-    if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.leave_type || !data.status || !data.from_date || !data.to_date || !data.reason) {
+    if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.leave_type || !data.status || !data.from_date || !data.to_date || !data.description) {
       frappe.msgprint({
         title: 'Error',
         message: 'Por favor, completa los campos obligatorios',
