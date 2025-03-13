@@ -52,7 +52,6 @@ $(document).ready(function() {
     });
   } );
   function loadModule(url) {
-    console.log("Cargando contenido desde: ", url);
     $('#dynamic-content').fadeOut(200, function() {
       $(this).load(url + ' #dynamic-content > *', function(response, status, xhr) {
         if (status == "error") {

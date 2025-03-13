@@ -2,6 +2,7 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/employee_portal/css/base.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock %}
 
 {% block title %}{{ ("Dotación") }}{% endblock %}
@@ -10,35 +11,35 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2>Dotaciones</h2>
+      <h2>Mis Comprobantes de Dotación</h2>
       
       <div class="row">
         <div class="col-md-12 text-right"> 
-            <a href="endowment/new" data-url="endowment/new"  class="module-link btn btn-primary mb-4">Crear Nueva Solicitud</a>
+            <a href="endowment/new" data-url="endowment/new"  class="module-link btn btn-outline-primary mb-4">Crear Nueva Solicitud</a>
         </div>
       </div>
       {% if endowments %}
         <table id="table-endowments"  class="table table-bordered frappe-list display" style="width: 100%;">
           <thead>
             <tr>
-              <th>Título</th>
+              <th>Nombre</th>
               <th>Fecha</th>
-              <th>Valor</th>
-              <th>Factura</th>
+              <th>Período</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
             {% for endowment in endowments %}
             <tr>
-              <td>{{ endowment.title }}</td>
+              <td>{{ endowment.name }}</td>
               <td>{{ endowment.date }}</td>
-              <td>{{ endowment.value }}</td>
-              <td>
-                {% if endowment.invoice %}
-                  <a href="{{ endowment.invoice }}" target="_blank">Ver Factura</a>
-                {% else %}
-                  No hay factura
-                {% endif %}
+              <td>{{ endowment.period }}</td>
+              <td class="text-center">
+                <a href="endowment/details?name={{ endowment.name }}"
+                  data-url="endowment/details?name={{ endowment.name }}"
+                  class="module-link">
+                  <i class="fa fa-eye"></i>
+                </a>
               </td>
             </tr>
             {% endfor %}
@@ -50,8 +51,8 @@
     </div>
   </div>
 </div>
-{% endblock %}
-{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script src="/assets/employee_portal/js/base.js"></script>
 {% endblock %}

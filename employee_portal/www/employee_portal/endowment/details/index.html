@@ -1,0 +1,114 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+{% block page_content %}
+<style>
+  .frappe-card{
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+  .frappe-control {
+    margin-bottom: 20px;
+  }
+</style>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h2>
+            Información del Comprobante de Dotación {{ endowment.name}}
+          </h2>
+            <div class="frappe-card">
+              <h3>Información General</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="period">Período de la Dotación</label>
+                    <input type="date" id="period" name="period" class="form-control" value="{{ endowment.period }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="date">Fecha</label>
+                    <input type="date" id="date" name="date" class="form-control" value="{{ endowment.date }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="employee-full-name">Nombre del Empleado</label>
+                    <input type="text" id="employee-full-name" name="employee_name" class="form-control" value="{{ employee.employee_name }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="employee-id">ID del Empleado</label>
+                    <input type="text" id="employee-id" name="employee_id" class="form-control" value="{{ employee.name }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="company">Empresa</label>
+                    <input type="text" name="company" id="leave" class="form-control" value="{{ endowment.company }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="department">Departamento</label>
+                    <input type="text" id="department" name="department" class="form-control" value="{{ endowment.department }}" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frappe-card">
+              <h3>Detalles de la Dotación</h3>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="frappe-control">
+                          <label for="amount">Monto</label>
+                          <input type="text" id="amount" name="amount" class="form-control" value="{{ endowment.amount }}" readonly>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="frappe-control">
+                    <label for="dotation-items">Elementos Recibidos como Dotación</label>
+                    <table class="table table-bordered" id="dotation-items" name="dotation-items">
+                      <thead>
+                        <tr>
+                          <th>Artículo</th>
+                          <th>Cantidad</th>
+                          <th>Talla</th>
+                          <th>Descripción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in endowment_items %}
+                        <tr>
+                          <td>{{ item.article }}</td>
+                          <td><input type="number" name="quantity_{{ item.article|lower }}" class="form-control" value="{{ item.quantity }}" readonly></td>
+                          <td><input type="text" name="size_{{ item.article|lower }}" class="form-control" value="{{ item.size }}" readonly></td>
+                          <td><input type="text" name="description_{{ item.article|lower }}" class="form-control" value="{{ item.description }}" readonly></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-right"> 
+                <a href="/employee_portal/endowment/" data-url="/employee_portal/endowment/" class="module-link btn btn-outline-primary">Listo</a>
+              </div>
+            </div>  
+      </div>
+  </div>
+</div>
+{% endblock %}
