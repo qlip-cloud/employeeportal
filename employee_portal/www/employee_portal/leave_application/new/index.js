@@ -1,6 +1,28 @@
 $(document).ready(function() {
   $('#send-application').off('click').on('click', function() {
     var employee_id = $('#employee-name').val();
+    var fromDate = new Date($('#from-datetime').val());
+    var toDate = new Date($('#to-datetime').val());
+
+    var timeDifference = (toDate - fromDate) / (1000 * 60 * 60); 
+
+    if (timeDifference < 1) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'El permiso debe ser de al menos 1 hora.',
+        indicator: 'red',
+      });
+      return;
+    }
+
+    if (timeDifference > 24) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'El permiso no puede exceder 1 día.',
+        indicator: 'red',
+      });
+      return;
+    }
     var data = {
       'employee' : $('#employee-name').val(),
       'employee_name' : $('#employee-full-name').val(),
