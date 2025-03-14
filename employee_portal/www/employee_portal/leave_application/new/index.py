@@ -3,6 +3,7 @@ from frappe.utils import getdate, nowdate, date_diff, add_days, cstr, cint # typ
 from employee_portal.utils.utils import get_modules, get_employee_from_user
 from employee_portal.employee_portal.services.employee.leave_application import save_application  # type: ignore
 
+
 def get_context(context):
     get_employee_from_user(context)
     get_modules(context)
