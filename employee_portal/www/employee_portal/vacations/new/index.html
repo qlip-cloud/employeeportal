@@ -29,6 +29,8 @@
         <input type="hidden" id="leave-approver" value="{{ employee.leave_approver }}">
         <input type="hidden" name="company" value="{{ employee.company }}">
         <input type="hidden" id="leave-status" name="leave-status" value="Open">
+        <input type="hidden" name="remaining_vacation_days" id="remaining_vacation_days" value="{{ remaining_vacation_days }}">
+        <input type="hidden" id="leave-type" name="leave-type" value="Vacaciones">
         <div class="row">
           <div class="col-md-6">
             <div class="frappe-control">
@@ -68,8 +70,25 @@
               <select name="replacement" id="replacement" class="form-control">
                 {% for emp in employees %}
                 <option value="{{ emp.name }}">{{ emp.employee_name }}</option>
-                {% endfor %}  
+                {% endfor %}
               </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frappe-card">
+        <h3>Período Trabajado</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="period-from">Período Desde</label>
+              <input type="date" id="period-from" name="period_from" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="period-to">Período Hasta</label>
+              <input type="date" id="period-to" name="period_to" class="form-control">
             </div>
           </div>
         </div>
