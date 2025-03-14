@@ -12,7 +12,8 @@
   "position",
   "column",
   "evaluator",
-  "dept",
+  "department",
+  "data_8",
   "section2",
   "obj1",
   "obj2",
@@ -104,26 +105,17 @@
    "reqd": 1
   },
   {
+   "fetch_from": "Employee.designation",
    "fieldname": "position",
-   "fieldtype": "Link",
-   "in_list_view": 1,
+   "fieldtype": "Read Only",
    "label": "Cargo",
-   "options": "Designation",
    "reqd": 1
   },
   {
+   "fetch_from": "Employee.reports_to",
    "fieldname": "evaluator",
-   "fieldtype": "Link",
-   "in_list_view": 1,
+   "fieldtype": "Read Only",
    "label": "Evaluador",
-   "options": "Employee",
-   "reqd": 1
-  },
-  {
-   "fieldname": "dept",
-   "fieldtype": "Link",
-   "label": "Departamento",
-   "options": "Department",
    "reqd": 1
   },
   {
@@ -236,11 +228,22 @@
    "fieldtype": "Text",
    "label": "Plan de Acci\u00f3n",
    "reqd": 1
+  },
+  {
+   "fetch_from": "Employee.department",
+   "fieldname": "department",
+   "fieldtype": "Read Only",
+   "label": "Departamento",
+   "reqd": 1
+  },
+  {
+   "fieldname": "data_8",
+   "fieldtype": "Data"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-30 12:34:10.033468",
+ "modified": "2025-03-05 16:07:25.393227",
  "modified_by": "Administrator",
  "module": "Employee Portal",
  "name": "Performance Review",

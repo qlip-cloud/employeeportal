@@ -1,0 +1,113 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+{% block title %}{{ ("Nueva Solicitud de Vacaciones") }}{% endblock %}
+{% block page_content %}
+<style>
+  .frappe-card {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+
+  .frappe-control {
+    margin-bottom: 20px;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>
+        Nueva Solicitud de Vacaciones
+      </h2>
+      <div class="frappe-card">
+        <h3>Información General</h3>
+        <input type="hidden" id="employee-name" value="{{ employee.name }}">
+        <input type="hidden" id="employee" value="{{employee}}">
+        <input type="hidden" id="leave-approver" value="{{ employee.leave_approver }}">
+        <input type="hidden" name="company" value="{{ employee.company }}">
+        <input type="hidden" id="leave-status" name="leave-status" value="Open">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="posting-date">Fecha de Solicitud</label>
+              <input type="date" id="posting-date" name="posting_date" class="form-control"
+                value="{{ frappe.utils.nowdate() }}" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="department">Proceso / Departamento</label>
+              <input type="text" id="department" name="employee_department" class="form-control"
+                value="{{ employee.department }}" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="employee-full-name">Nombre del Empleado</label>
+              <input type="text" id="employee-full-name" name="employee_name" class="form-control"
+                value="{{ employee.employee_name }}" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="employee-id">ID del Empleado</label>
+              <input type="text" id="employee-id" name="employee_id" class="form-control" value="{{ employee.name }}"
+                readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="replacement">Suplente</label>
+              <select name="replacement" id="replacement" class="form-control">
+                {% for emp in employees %}
+                <option value="{{ emp.name }}">{{ emp.employee_name }}</option>
+                {% endfor %}  
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frappe-card">
+        <h3>Tiempo Solicitado</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="from-datetime">Desde</label>
+              <input type="datetime-local" id="from-datetime" name="from_datetime" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="to-datetime">Hasta</label>
+              <input type="datetime-local" id="to-datetime" name="to_datetime" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="frappe-control">
+              <label for="description">Observaciones del Empleado</label>
+              <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <input type="button" id="send-application" value="Enviar Solicitud" class="btn btn-outline-primary">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="new/index.js"></script>
+{% endblock %}

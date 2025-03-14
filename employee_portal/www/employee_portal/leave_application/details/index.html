@@ -1,0 +1,131 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/assets/employee_portal/css/base.css">
+{% endblock %}
+{% block title %}{{ ("Detalles de la Solicitud") }}{% endblock %}
+{% block page_content %}
+<style>
+  .frappe-card{
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+  .frappe-control {
+    margin-bottom: 20px;
+  }
+</style>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h2>
+            Información de la Solicitud de Permiso {{ leave.name}}
+          </h2>
+            <div class="frappe-card">
+              <h3>Información General</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="posting-date">Fecha de Solicitud</label>
+                    <input type="date" id="posting-date" name="posting_date" class="form-control" value="{{ leave.posting_date }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="department">Proceso / Departamento</label>
+                    <input type="text" id="department" name="employee_department" class="form-control" value="{{ employee.department }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="employee-full-name">Nombre del Empleado</label>
+                    <input type="text" id="employee-full-name" name="employee_name" class="form-control" value="{{ employee.employee_name }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="employee-id">ID del Empleado</label>
+                    <input type="text" id="employee-id" name="employee_id" class="form-control" value="{{ employee.name }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="leave-type">Tipo y Causa del Permiso</label>
+                    <input type="text" name="leave-type" id="leave-type" class="form-control" value="{{ leave.leave_type }}" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frappe-card">
+              <h3>Tiempo Solicitado</h3>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="frappe-control">
+                          <label for="from-datetime">Desde</label>
+                          <input type="datetime-local" id="from-datetime" name="from_datetime" class="form-control" value="{{ leave.from_date }}" readonly>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="frappe-control">
+                          <label for="to-datetime">Hasta</label>
+                          <input type="datetime-local" id="to-datetime" name="to_datetime" class="form-control" value="{{ leave.to_date }}" readonly>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="total-days">Total de Días</label>
+                    <input type="text" id="total-days" name="total_days" class="form-control" value="{{ leave.total_leave_days }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="total-hours">Total de Horas</label>
+                    <input type="text" id="total-hours" name="total_hours" class="form-control" value="{{ leave.total_leave_hours }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="frappe-control">
+                    <label for="description">Motivo / Observaciones del Empleado</label>
+                    <textarea id="description" name="description" class="form-control" rows="3">{{leave.description}}</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="frappe-card">
+              <h3>Decisión Sobre la Solicitud</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="frappe-control">
+                    <label for="status">Estado de la Solicitud</label>
+                    <input type="text" id="status" name="status" class="form-control" value="{{ leave.status }}" readonly>
+                  </div>
+                </div>
+              </div>
+              {% if leave.status == "Approved" %}
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="approved-by">Aprobado por</label>
+                      <input type="text" id="approved-by" name="approved_by" class="form-control" value="{{ employee.leave_approver }}" readonly>
+                    </div>
+                  </div>
+              {% endif %}
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-right"> 
+                <a href="/employee_portal/leave_application/" data-url="/employee_portal/leave_application/" class="module-link btn btn-outline-primary">Listo</a>
+              </div>
+            </div>  
+      </div>
+  </div>
+</div>
+{% endblock %}
