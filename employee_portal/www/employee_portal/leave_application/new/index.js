@@ -4,9 +4,10 @@ $(document).ready(function() {
     var fromDate = new Date($('#from-datetime').val());
     var toDate = new Date($('#to-datetime').val());
 
-    var timeDifference = (toDate - fromDate) / (1000 * 60 * 60); 
+    var diffMs = toDate - fromDate;
+    var diffHours = diffMs / (1000 * 60 * 60);
 
-    if (timeDifference < 1) {
+    if (diffHours < 1) {
       frappe.msgprint({
         title: 'Error',
         message: 'El permiso debe ser de al menos 1 hora.',
@@ -15,7 +16,7 @@ $(document).ready(function() {
       return;
     }
 
-    if (timeDifference > 24) {
+    if (diffHours > 24) {
       frappe.msgprint({
         title: 'Error',
         message: 'El permiso no puede exceder 1 día.',
@@ -23,6 +24,20 @@ $(document).ready(function() {
       });
       return;
     }
+
+    // Validación 32 horas MENTUM
+    var remainingMentumHours = parseFloat("{{ remaining_mentum_hours }}");
+    console.log(remainingMentumHours);
+
+    if (diffHours > remainingMentumHours) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'Solo tienes ${remainingMentumHours} horas disponibles para permisos en este año MENTUM.',
+        indicator: 'red',
+      });
+      return;
+    }
+
     var data = {
       'employee' : $('#employee-name').val(),
       'employee_name' : $('#employee-full-name').val(),
