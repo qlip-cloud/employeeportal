@@ -11,6 +11,7 @@
     border: 1px solid #e8e8e8;
     border-radius: 10px;
   }
+
   .frappe-control {
     margin-bottom: 20px;
   }
@@ -19,7 +20,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Información de la Solicitud de Permiso {{ leave.name }}</h2>
-      
+
       <!-- Información General -->
       <div class="frappe-card">
         <h3>Información General</h3>
@@ -41,13 +42,34 @@
           <div class="col-md-6">
             <div class="frappe-control">
               <label for="employee-full-name">Nombre del Empleado</label>
-              <input type="text" id="employee-full-name" class="form-control" value="{{ employee.employee_name }}" readonly>
+              <input type="text" id="employee-full-name" class="form-control" value="{{ employee.employee_name }}"
+                readonly>
             </div>
           </div>
           <div class="col-md-6">
             <div class="frappe-control">
               <label for="employee-id">ID del Empleado</label>
               <input type="text" id="employee-id" class="form-control" value="{{ employee.name }}" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Período Trabajado -->
+      <div class="frappe-card">
+        <h3>Período Trabajado</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="period-from">Período desde</label>
+              <input type="date" id="period-from" class="form-control" value="{{ leave.period_from }}" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="period-to">Período hasta</label>
+              <input type="date" id="period-to" class="form-control" value="{{ leave.period_to }}" readonly>
             </div>
           </div>
         </div>
@@ -60,7 +82,8 @@
           <div class="col-md-6">
             <div class="frappe-control">
               <label for="from-datetime">Desde</label>
-              <input type="datetime-local" id="from-datetime" class="form-control" value="{{ leave.from_date }}" readonly>
+              <input type="datetime-local" id="from-datetime" class="form-control" value="{{ leave.from_date }}"
+                readonly>
             </div>
           </div>
           <div class="col-md-6">
@@ -87,6 +110,7 @@
       </div>
 
       <!-- Días de Vacaciones -->
+      {% if leave.status == "Approved" %}
       <div class="frappe-card">
         <h3>Días de Vacaciones</h3>
         <div class="row">
@@ -105,12 +129,13 @@
           <div class="col-md-4">
             <div class="frappe-control">
               <label for="remaining-days">Días Restantes</label>
-              <input type="text" id="remaining-days" class="form-control" value="{{ leave_details.remaining_days }}" readonly>
+              <input type="text" id="remaining-days" class="form-control" value="{{ leave_details.remaining_days }}"
+                readonly>
             </div>
           </div>
         </div>
       </div>
-
+      {% endif %}
       <!-- Motivo del Permiso -->
       <div class="frappe-card">
         <h3>Motivo / Observaciones del Empleado</h3>
@@ -133,12 +158,6 @@
               <input type="text" id="status" class="form-control" value="{{ leave.status }}" readonly>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="frappe-control">
-              <label for="with-pay">Con Goce de Salario</label>
-              <input type="text" id="with-pay" class="form-control" value="{{ leave.with_pay }}" readonly>
-            </div>
-          </div>
         </div>
         {% if leave.status == "Approved" %}
         <div class="row">
@@ -158,13 +177,13 @@
         {% endif %}
       </div>
 
-    
+
       <div class="row">
         <div class="col-md-12 text-right">
           <a href="/employee_portal/vacations/" class="btn btn-outline-primary">Listo</a>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
