@@ -1,45 +1,62 @@
 $(document).ready(function () {
-    $('.module-link').on('click', function (event) {
-        event.preventDefault();
-        let url = $(this).data('url');
+  function loadModule(url) {
+    $('#dynamic-content').fadeOut(150, function () {
+      $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (response) {
+          let newContent = $(response).find('#dynamic-content').html();
 
-        $('#dynamic-content').html('<div class="loading-message">Cargando...</div>');
+          $('#dynamic-content').html(newContent).fadeIn(150);
 
-        $.ajax({
-            url: url,
-            method: 'GET',
-            success: function (response) {
-                let newContent = $(response).find('#dynamic-content').html();
-                $('#dynamic-content').html(newContent);
-
-                $(response).find('link[rel="stylesheet"]').each(function () {
-                    let href = $(this).attr('href');
-                    if (!$(`link[href="${href}"]`).length) {
-                        $('<link>', { rel: 'stylesheet', href: href }).appendTo('head');
-                    }
-                });
-
-                $(response).find('script').each(function () {
-                    let src = $(this).attr('src');
-                    if (src && !$(`script[src="${src}"]`).length) {
-                        $.getScript(src);
-                    }
-                });
-
-                $(response).find('script:not([src])').each(function () {
-                    $.globalEval(this.textContent || this.innerText);
-                });
-                if (url.includes('my_profile')) {
-                    if (typeof initializeEmployeeForm === 'function') {
-                        initializeEmployeeForm();
-                    }
-                }
-                history.pushState(null, '', url);
-            },
-            error: function () {
-                console.error("Error al cargar el contenido.");
+          $(response).find('link[rel="stylesheet"]').each(function () {
+            let href = $(this).attr('href');
+            if (!$(`link[href="${href}"]`).length) {
+              $('<link>', { rel: 'stylesheet', href: href }).appendTo('head');
             }
-        });
+          });
+
+          let scripts = $(response).find('script[src]').map(function () {
+            return $(this).attr('src');
+          }).get();
+
+          loadScriptsSequentially(scripts, function () {
+            $(response).find('script:not([src])').each(function () {
+              $.globalEval(this.textContent || this.innerText);
+            });
+          });
+
+          history.pushState(null, '', url);
+          attachModuleEvents();
+        },
+        error: function (xhr, status, error) {
+          console.error("Error al cargar el contenido: ", error);
+          $('#dynamic-content').fadeIn(150);
+        }
+      });
     });
-    
+  }
+
+  function loadScriptsSequentially(scripts, callback) {
+    function loadNext(index) {
+      if (index < scripts.length) {
+        $.getScript(scripts[index], function () {
+          loadNext(index + 1);
+        });
+      } else if (typeof callback === "function") {
+        callback();
+      }
+    }
+    loadNext(0);
+  }
+
+  function attachModuleEvents() {
+    $('.module-link').off('click').on('click', function (event) {
+      event.preventDefault();
+      let url = $(this).data('url');
+      loadModule(url);
+    });
+  }
+
+  attachModuleEvents();
 });
