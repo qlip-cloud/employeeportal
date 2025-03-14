@@ -26,13 +26,12 @@ $(document).ready(function() {
     }
 
     // Validación 32 horas MENTUM
-    var remainingMentumHours = parseFloat("{{ remaining_mentum_hours }}");
-    console.log(remainingMentumHours);
+    var remainingMentumHours = $('#remaining_mentum_hours').val();
 
     if (diffHours > remainingMentumHours) {
       frappe.msgprint({
         title: 'Error',
-        message: 'Solo tienes ${remainingMentumHours} horas disponibles para permisos en este año MENTUM.',
+        message: 'Solo tienes ' + remainingMentumHours + ' horas de permiso disponibles.',
         indicator: 'red',
       });
       return;
