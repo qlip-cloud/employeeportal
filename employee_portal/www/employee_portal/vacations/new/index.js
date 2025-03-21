@@ -31,11 +31,10 @@ $(document).ready(function() {
 
     // Validación solicitud realizada con al menos dos meses de anticipación
     var today = new Date();
-    var requestDate = new Date($('#posting-date').val());
+    var requestedDate = new Date($('#from-datetime').val());
     var minRequestDate = new Date();
     minRequestDate.setDate(today.getDate() + 60);
-
-    if (requestDate < minRequestDate) {
+    if (requestedDate < minRequestDate) {
       frappe.msgprint({
         title: 'Error',
         message: 'La solicitud debe ser realizada con al menos 2 meses de anticipación.',
@@ -59,7 +58,8 @@ $(document).ready(function() {
       'period_to': $('#period-to').val(),
       'description': $('#description').val(),
       'status': $('#leave-status').val(),
-      'replacement': $('#replacement').val()  
+      'replacement': $('#replacement').val(),
+      'follow_via_email': true,
     };
 
     if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.status || !data.from_date || !data.to_date || !data.description) {
