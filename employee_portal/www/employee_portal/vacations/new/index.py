@@ -9,7 +9,8 @@ def get_context(context):
   context.employees = frappe.get_all(
       "Employee",
       filters=[["user_id", "!=", frappe.session.user]],  
-      fields=["*"]
+      fields=["*"],
+      
   )
   # Validación 15 días de vacaciones
   today = getdate(nowdate()) 
