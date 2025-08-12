@@ -1,0 +1,64 @@
+{% extends "employee_portal/templates/base.html" %}
+{% block title %}{{ ("Portal de Empleado") }}{% endblock %}
+{% block page_content %}
+{%if employee%}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Hola, {{employee.first_name}}!</h2><br>
+        <h3>Anuncios Recientes</h3>
+        {% if announcements %}
+          {% for announcement in announcements%}
+          <div class="frappe-card mb-5">
+            {% if announcement.image %}
+              <img src="{{ announcement.image }}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{announcement.title}}</h5>
+              <p class="card-text">{{announcement.content}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <p>No hay anuncios recientes</p>
+        {% endif %}
+      </div>  
+      <div class="col-md-3">
+        <h3>Próximos Eventos</h3>
+        {% if events %}
+          <div class="list-group">
+            {% for event in events %}
+              <div class="frappe-card mb-5">
+                {% if event.image %}
+                  <img src="{{ event.image }}" class="card-img-top" alt="Imagen del Evento">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">{{ event.subject }}</h5>
+                  <p class="card-text">
+                    <strong>Fecha de inicio:</strong> {{ event.starts_on }}<br>
+                    <strong>Fecha de fin:</strong> {{ event.ends_on }}<br>
+                    {% if event.description %}
+                      <p>{{ event.description }}</p>
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-center">No hay eventos próximos</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>    
+{%else%}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Portal de Empleado</h2>
+        <p>Por favor, inicie sesión para acceder al portal de empleado.</p>
+      </div>
+    </div>
+  </div>
+{%endif%}       
+{% endblock %}
