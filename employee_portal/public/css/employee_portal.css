@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+.card {
+  border: none;
+  transition: transform 0.2s;
+  padding: 0% !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card i {
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 16px;
+  color: #000;
+}
+
+.frappe-card {
+  margin-bottom: 10px;
+
+}
+
+/* Sidebar */
+#sidebar-wrapper {
+  z-index: 1;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  overflow-y: hidden;
+  background: #fff;
+  opacity: 0.9;
+  transition: all .5s;
+  display: flex;
+  align-items: center;
+}
+
+/* Main Content */
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+  transition: all .5s;
+}
+
+#menu-toggle {
+  transition: all .3s;
+  font-size: 2em;
+  box-shadow: none !important;
+}
+
+/* Change the width of the sidebar to display it*/
+#wrapper.menuDisplayed #sidebar-wrapper {
+  width: 250px;
+}
+
+#wrapper.menuDisplayed #page-content-wrapper {
+  padding-left: 250px;
+}
+
+/* Sidebar styling */
+.sidebar-nav {
+  padding: 0;
+  list-style: none;
+  transition: all .5s;
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  width: 100%;
+  transition: all .3s;
+  padding: 10px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #757371;
+}
+
+.sidebar-nav li.active a {
+  color: #FF7A50;
+  text-decoration: none;
+  background-color: #ffded469;
+  border-radius: 5px;
+}
+
+.sidebar-nav li a:hover {
+  color: #FF7A50;
+  text-decoration: none;
+  background-color: #ffded469;
+  border-radius: 5px;
+}

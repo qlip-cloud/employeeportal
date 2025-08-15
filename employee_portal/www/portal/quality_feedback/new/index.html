@@ -1,0 +1,149 @@
+{% extends "employee_portal/templates/includes/base.html" %}
+{% block title %}{{ "Nueva Evaluación" }}{% endblock %}
+{% block page_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Nueva Evaluación de Desempeño</h2>
+      <form id="eva-form" method="post">
+        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+        
+        <!-- Información General -->
+        <div class="frappe-card">
+          <h3>Información General</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Fecha *</label>
+              <input type="date" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label>Evaluador *</label>
+              <input type="text" class="form-control" value="{{employee.reports_to}}" readonly>
+            </div>
+            <div class="col-md-6">
+              <label>Evaluado *</label>
+              <input type="text" class="form-control" value="{{employee.employee_name}}" readonly>
+            </div>
+            <div class="col-md-6">
+              <label>Departamento *</label>
+              <input type="text" class="form-control" value="{{employee.department}}" readonly>
+            </div>
+            <div class="col-md-6">
+              <label>Cargo *</label>
+              <input type="text" class="form-control" value="{{employee.designation}}" readonly>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Objetivos y Resultados -->
+        <div class="frappe-card">
+          <h3>Objetivos y Resultados</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Objetivo y Resultado 1</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Cumplió 1</label>
+              <select class="form-control">
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Objetivo y Resultado 2</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Cumplió 2</label>
+              <select class="form-control">
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Objetivo y Resultado 3</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Cumplió 3</label>
+              <select class="form-control">
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Competencias y Habilidades -->
+        <div class="frappe-card">
+          <h3>Competencias y Habilidades</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Competencias y Habilidades 1</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Cumplió 1</label>
+              <select class="form-control">
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Competencias y Habilidades 2</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Cumplió 2</label>
+              <select class="form-control">
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Competencias y Habilidades 3</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Cumplió 3</label>
+              <select class="form-control">
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Retroalimentación y Plan de Acción -->
+        <div class="frappe-card">
+          <h3>Retroalimentación y Plan de Acción</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Comentarios *</label>
+              <textarea class="form-control" required></textarea>
+            </div>
+            <div class="col-md-6">
+              <label>Plan de Acción *</label>
+              <textarea class="form-control" required></textarea>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Botón de envío -->
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-primary">Guardar Evaluación</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
