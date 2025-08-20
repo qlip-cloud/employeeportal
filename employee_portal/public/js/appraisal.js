@@ -1,87 +1,38 @@
 frappe.ui.form.on('Appraisal', {
-	refresh(frm) {
-		frm.add_custom_button("Generar Empleado", function () {
-			let d = new frappe.ui.Dialog({
-				title: "Generar nuevo Empleado",
-				fields: [
-					{
-						label: "Usuario del empleado",
-						fieldname: "user_id",
-						fieldtype: "Link",
-						options: "User",
-						reqd: 1
-					},
-					{
-						label: "Jefe inmediato",
-						fieldname: "supervisor_user_id",
-						fieldtype: "Link",
-						options: "Employee"
-					},
-					{
-						label: "Fecha de ingreso",
-						fieldname: "date_of_joining",
-						fieldtype: "Date"
-					},
-					{
-						label: "Puesto",
-						fieldname: "designation",
-						fieldtype: "Link",
-						options: "Designation"
-					},
-					{
-						label: "Departamento",
-						fieldname: "department",
-						fieldtype: "Link",
-						options: "Department"
+	kra_template: function (frm) {
+		if (frm.doc.kra_template) {
+			frappe.db.get_value('Appraisal Template', frm.doc.kra_template, 'is_180_evaluation')
+				.then(r => {
+					if (r.message) {
+						frm.set_value('is_180_evaluation', r.message.is_180_evaluation);
+						frm.trigger('toggle_180_fields');
 					}
-				],
-				primary_action_label: "Crear",
-				primary_action(values) {
-					if (!values.user_id || !values.supervisor_user_id) {
-						frappe.msgprint("Debes ingresar el usuario del empleado y el del jefe.");
-						return;
-					}
+				});
+		}
+	},
 
-					frappe.db.get_value("Employee", { user_id: values.user_id }, "name")
-						.then(r => {
-							if (r.message && r.message.name) {
-								frm.set_value("employee", r.message.name);
-								frappe.msgprint("Empleado existente asignado al Appraisal.");
-								d.hide();
-							} else {
-								frappe.db.get_value("User", values.user_id, ["first_name", "last_name"])
-									.then(user_res => {
-										let user_data = user_res.message || {};
+	refresh: function (frm) {
+		frm.trigger('toggle_180_fields');
+	},
 
-										frappe.call({
-											method: "frappe.client.insert",
-											args: {
-												doc: {
-													doctype: "Employee",
-													user_id: values.user_id,
-													reports_to: values.supervisor_user_id,
-													date_of_joining: values.date_of_joining || undefined,
-													designation: values.designation || undefined,
-													department: values.department || undefined,
-													first_name: user_data.first_name || "",
-													last_name: user_data.last_name || ""
-												}
-											},
-											callback: function (res) {
-												if (!res.exc) {
-													frm.set_value("employee", res.message.name);
-													frappe.msgprint("Empleado creado y asignado al Appraisal.");
-													d.hide();
-												}
-											}
-										});
-									});
-							}
-						});
-				}
-			});
+	toggle_180_fields: function (frm) {
+		let show = frm.doc.is_180_evaluation;
 
-			d.show();
+		const fields = [
+			'start_action',
+			'stop_action',
+			'cb_actions',
+			'continue_action',
+			'sb_action_plan',
+			'sb_supervisor',
+			'total_supervisor_score',
+			'supervisor_feedback',
+			'supervisor_template',
+			'remarks'
+		];
+
+		fields.forEach(f => {
+			frm.toggle_display(f, show);
 		});
 	},
 	supervisor_template: function (frm) {

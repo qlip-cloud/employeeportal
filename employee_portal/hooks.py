@@ -23,8 +23,8 @@ app_license = "MIT"
 #]
 
 # include js, css files in header of web template
-# web_include_css = "/assets/employee_portal/css/employee_portal.css"
-# web_include_js = "/assets/employee_portal/js/employee_portal.js"
+web_include_css = "/assets/employee_portal/css/employee_portal.css"
+web_include_js = "/assets/employee_portal/js/employee_portal.js"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "employee_portal/public/scss/website"
@@ -41,10 +41,6 @@ app_license = "MIT"
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
-
-doctype_js = {
-  "Appraisal": "public/js/appraisal.js"
-}
 
 # Home Pages
 # ----------
