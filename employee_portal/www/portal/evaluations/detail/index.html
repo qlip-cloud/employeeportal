@@ -32,8 +32,6 @@
     <div class="col-md-12">
 
       <h2>Detalle de Evaluación de Desempeño</h2>
-      <input type="hidden" id="evaluation-id" value="{{ evaluation.name }}">
-      <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
 
       <!-- Datos Generales -->
       <div class="frappe-card">
@@ -82,8 +80,8 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ goal.goal }}</td>
                 <td>{{ goal.score }}</td>
-                <td>{{ goal.self_score }}</td>
-                <td>{{ goal.final_score }}</td>
+                <td>{{ goal.self_assessment }}</td>
+                <td>{{ goal.score_earned }}</td>
               </tr>
             {% endfor %}
           </tbody>
@@ -139,9 +137,9 @@
               <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ competency.goal }}</td>
-                <td>{{ competency.percentage }}</td>
+                <td>{{ competency.per_weightage }}</td>
                 <td>{{ competency.score }}</td>
-                <td>{{ competency.final_score }}</td>
+                <td>{{ competency.score_earned }}</td>
               </tr>
             {% endfor %}
           </tbody>
