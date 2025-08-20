@@ -78,7 +78,7 @@
             {% for goal in evaluation.goals %}
               <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ goal.goal }}</td>
+                <td>{{ goal.kra }}</td>
                 <td>{{ goal.score }}</td>
                 <td>{{ goal.self_assessment }}</td>
                 <td>{{ goal.score_earned }}</td>
@@ -136,7 +136,7 @@
             {% for competency in evaluation.supervisor_feedback  %}
               <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ competency.goal }}</td>
+                <td>{{ competency.kra }}</td>
                 <td>{{ competency.per_weightage }}</td>
                 <td>{{ competency.score }}</td>
                 <td>{{ competency.score_earned }}</td>
