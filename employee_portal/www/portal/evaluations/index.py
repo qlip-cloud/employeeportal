@@ -7,6 +7,6 @@ def get_context(context):
   is_guest()
   is_employee()
   context.employee = get_employee()
-  context.evaluations = frappe.get_all("Appraisal", filters={"employee": context.employee}, fields=["*"])
+  context.evaluations = frappe.get_all("Appraisal", filters={"employee": context.employee.name}, fields=["*"])
 
   return context

@@ -4,13 +4,11 @@
   box-sizing: border-box;
 }
 
-.employee_portal *{
+.employee_portal *:not(.material-symbols-outlined) {
   font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
-
 
 .card {
   border: none;
