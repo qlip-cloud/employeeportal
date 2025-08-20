@@ -4,14 +4,7 @@
   box-sizing: border-box;
 }
 
-body,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.employee_portal *{
   font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-variation-settings:
@@ -43,11 +36,17 @@ h6 {
 
 }
 
-/* Sidebar */
+#menu-toggle {
+  transition: all .3s;
+  font-size: 2em;
+  box-shadow: none !important;
+}
+
+
 #sidebar-wrapper {
   z-index: 1;
   position: absolute;
-  width: 0;
+  width: 60px;
   height: 100%;
   overflow-y: hidden;
   background: #fff;
@@ -57,61 +56,48 @@ h6 {
   align-items: center;
 }
 
-/* Main Content */
-#page-content-wrapper {
-  width: 100%;
-  position: absolute;
-  padding: 15px;
-  transition: all .5s;
-}
-
-#menu-toggle {
-  transition: all .3s;
-  font-size: 2em;
-  box-shadow: none !important;
-}
-
-/* Change the width of the sidebar to display it*/
 #wrapper.menuDisplayed #sidebar-wrapper {
   width: 250px;
 }
+
 
 #wrapper.menuDisplayed #page-content-wrapper {
   padding-left: 250px;
 }
 
-/* Sidebar styling */
+#wrapper:not(.menuDisplayed) #page-content-wrapper {
+  padding-left: 60px;
+}
+
+
 .sidebar-nav {
   padding: 0;
   list-style: none;
   transition: all .5s;
   width: 100%;
-  text-align: center;
-}
-
-.sidebar-nav li {
-  line-height: 40px;
-  width: 100%;
-  transition: all .3s;
-  padding: 10px;
 }
 
 .sidebar-nav li a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   color: #757371;
+  padding: 10px;
+  margin: 5px;
 }
 
-.sidebar-nav li.active a {
-  color: #FF7A50;
-  text-decoration: none;
-  background-color: #ffded469;
-  border-radius: 5px;
+.sidebar-nav li a .material-symbols-outlined {
+  font-size: 24px;
 }
 
+#wrapper:not(.menuDisplayed) .sidebar-nav li a .link-text {
+  display: none;
+}
+
+.sidebar-nav li.active a,
 .sidebar-nav li a:hover {
   color: #FF7A50;
-  text-decoration: none;
   background-color: #ffded469;
   border-radius: 5px;
 }

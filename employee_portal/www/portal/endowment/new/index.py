@@ -1,10 +1,12 @@
 import frappe
-from employee_portal.utils.utils import get_modules, get_employee_from_user
+
 from employee_portal.employee_portal.services.employee.endowment import save_endowment
+from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
 
 def get_context(context):
-    get_modules(context)
-    get_employee_from_user(context)
+    is_guest()
+    is_employee()
+    context.employee = get_employee()
     context.csrf_token = frappe.sessions.get_csrf_token()
     return context
 

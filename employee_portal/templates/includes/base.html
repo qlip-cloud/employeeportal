@@ -1,25 +1,37 @@
 {% extends "frappe/templates/base.html" %}
 
 {% block alphas_ccs %}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24..48,400,0..1,0&display=swap" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24..48,400,0..1,0&display=swap" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 {% endblock %}
-
+{% set modules = [
+    {"name": "Inicio", "url": "/portal", "icon": "home"},
+    {"name": "Mis Datos", "url": "/portal/profile", "icon": "person"},
+    {"name": "Mis Evaluaciones", "url": "/portal/evaluations", "icon": "bar_chart"},
+    {"name": "Mis Eventos", "url": "/portal/events", "icon": "event"},
+    {"name": "Mis Permisos/Ausencias", "url": "/portal/leave_application", "icon": "schedule"},
+    {"name": "Mis Vacaciones", "url": "/portal/vacations", "icon": "beach_access"},
+    {"name": "Mi Dotación", "url": "/portal/endowment", "icon": "inventory"},
+    {"name": "Mis Beneficios", "url": "/portal/benefits", "icon": "card_giftcard"},
+    {"name": "Documentos y Políticas", "url": "/portal/documents", "icon": "description"},
+    {"name": "Soporte", "url": "/portal/help", "icon": "help"}
+] %}
 {% block content %}
-<div id="wrapper">
+<div id="wrapper" class="menuDisplayed employee_portal">
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       {% for module in modules %}
       <li>
-        <a href="{{module.url}}" class="module-link" data-url="{{module.url}}">
-          {{ module.name }}
+        <a href="{{ module.url }}" class="module-link" data-url="{{ module.url }}">
+          <span class="material-symbols-outlined">{{ module.icon }}</span>
+          <span class="link-text">{{ module.name }}</span>
         </a>
       </li>
       {% endfor %}
@@ -31,10 +43,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-          <a href="#" class="btn" id="menu-toggle"><span class="material-symbols-outlined">menu</span></a>
+          <a href="#" class="btn" id="menu-toggle"><span class="material-symbols-outlined">menu_open</span></a>
           <div id="dynamic-content">
-            {% block page_content %}
-            {% endblock %}
+            {% block page_content %}{% endblock %}
           </div>
         </div>
       </div>
@@ -42,8 +53,12 @@
   </div>
 </div>
 {% endblock %}
+
 {% block alphas_js %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script src="/assets/employee_portal/js/base.js"></script>
+<script src="/assets/employee_portal/js/router.js"></script>
 {% endblock %}

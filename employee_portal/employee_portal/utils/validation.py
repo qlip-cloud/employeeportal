@@ -17,3 +17,6 @@ def is_employee():
     frappe.throw(_("Necesita iniciar sesión como empleado para acceder a esta página"), frappe.PermissionError)
   return is_employee
 
+def get_employee():
+  employee = frappe.get_doc("Employee", {"user_id": frappe.session.user})
+  return employee

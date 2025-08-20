@@ -1,8 +1,11 @@
 import frappe
 from frappe import _
-from employee_portal.utils.utils import get_employee_from_user
+from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
+
 def get_context(context):
-    get_employee_from_user(context)
+    is_guest()
+    is_employee()
+    context.employee = get_employee()
     genders = frappe.get_all("Gender", fields=["gender"])
     context.genders = genders
     employment_types = frappe.get_all("Employment Type", fields=["employee_type_name"])
@@ -11,7 +14,11 @@ def get_context(context):
     context.designations = designations
     employee = context.employee
     context.employee = employee
-    csfr_token = frappe.sessions.get_csrf_token()
-    frappe.db.commit()
-    context.csrf_token = csfr_token
+    evaluation_name = frappe.form_dict.name
+    if not evaluation_name:
+        frappe.throw("No se especificó la evaluación")
+
+    evaluation = frappe.get_doc("Evaluation", evaluation_name)
+
+    context.evaluation = evaluation
     return context  

@@ -11,7 +11,7 @@ $(document).ready(function() {
           },
           events: function(fetchInfo, successCallback, failureCallback) {
               frappe.call({
-                  method: "employee_portal.www.employee_portal.events.index.get_events",
+                  method: "employee_portal.www.portal.events.index.get_events",
                   args: {},
                   callback: function(response) {
                       var events = response.message || [];

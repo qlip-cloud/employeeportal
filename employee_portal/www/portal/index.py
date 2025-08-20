@@ -1,12 +1,12 @@
 import frappe
-from datetime import datetime
-from employee_portal.utils.utils import get_modules  # type: ignore
-from employee_portal.employee_portal.utils.validation import is_guest, is_employee  # type: ignore
+from datetime import datetime # type: ignore
+from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
 
 
 def get_context(context):
   is_guest()
   is_employee()
+  context.employee = get_employee
 
   # Fetch announcements
   context.announcements = frappe.get_all(
@@ -24,7 +24,7 @@ def get_context(context):
   )
 
   # Get modules for the portal
-  get_modules(context)
+  
 
   # Fetch employee details
   try:
