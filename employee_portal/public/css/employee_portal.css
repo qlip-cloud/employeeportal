@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.employee_portal *{
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+.card {
+  border: none;
+  transition: transform 0.2s;
+  padding: 0% !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card i {
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 16px;
+  color: #000;
+}
+
+.frappe-card {
+  margin-bottom: 10px;
+
+}
+
+#menu-toggle {
+  transition: all .3s;
+  font-size: 2em;
+  box-shadow: none !important;
+}
+
+
+#sidebar-wrapper {
+  z-index: 1;
+  position: absolute;
+  width: 60px;
+  height: 100%;
+  overflow-y: hidden;
+  background: #fff;
+  opacity: 0.9;
+  transition: all .5s;
+  display: flex;
+  align-items: center;
+}
+
+#wrapper.menuDisplayed #sidebar-wrapper {
+  width: 250px;
+}
+
+
+#wrapper.menuDisplayed #page-content-wrapper {
+  padding-left: 250px;
+}
+
+#wrapper:not(.menuDisplayed) #page-content-wrapper {
+  padding-left: 60px;
+}
+
+
+.sidebar-nav {
+  padding: 0;
+  list-style: none;
+  transition: all .5s;
+  width: 100%;
+}
+
+.sidebar-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #757371;
+  padding: 10px;
+  margin: 5px;
+}
+
+.sidebar-nav li a .material-symbols-outlined {
+  font-size: 24px;
+}
+
+#wrapper:not(.menuDisplayed) .sidebar-nav li a .link-text {
+  display: none;
+}
+
+.sidebar-nav li.active a,
+.sidebar-nav li a:hover {
+  color: #FF7A50;
+  background-color: #ffded469;
+  border-radius: 5px;
+}

@@ -1,0 +1,17 @@
+{% extends "employee_portal/templates/includes/base.html" %}
+{% block style %}
+{% endblock %}
+
+{% block title %}{{ ("Mis Eventos") }}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h2>Calendario de Eventos</h2>
+          <div id="calendar"></div>
+      </div>
+  </div>
+</div>
+<script src="events/index.js"></script>
+{% endblock %}
