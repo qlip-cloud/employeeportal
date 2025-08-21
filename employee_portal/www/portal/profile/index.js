@@ -10,6 +10,11 @@ $(document).ready(function() {
       'employee_number': $('#employee-number').val(),
       'emergency_phone': $('#emergency-phone').val(),
       'emergency_contact': $('#emergency-contact').val(),
+      'relation': $('#relation').val(),
+      'current_accommodation_type': $('#current_accommodation_type').val(),
+      'current_address': $('#current_address').val(),
+      'health_details': $('#health_details').val(),
+      'family_background': $('#family_background').val()
     };
     if (!data.first_name || !data.last_name || !data.dob || !data.gender) {
       frappe.msgprint({
@@ -20,7 +25,8 @@ $(document).ready(function() {
       return;
     }
     frappe.call({
-      method: 'employee_portal.www.employee_portal.profile.index.save_profile',
+      method: 'employee_portal.employee_portal.uses_cases.employee.employee.save_profile',
+      freeze: true,
       args: {
         employee_id: employee_id,
         data: data
@@ -32,7 +38,7 @@ $(document).ready(function() {
           frappe.msgprint(
             {
               title: 'Notificación',
-              message: 'Tu perfil ha sido actualizado',
+              message: 'Tu información ha sido actualizada',
               indicator: 'green',
             }
           );
