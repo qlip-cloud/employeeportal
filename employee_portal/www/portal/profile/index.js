@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#profile-save').off('click').on('click', function() {
+    console.log("Profile save button clicked");
     var employee_id = $('#employee-name').val();
     var data = {
       'first_name': $('#first_name').val(),
