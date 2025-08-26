@@ -1,4 +1,4 @@
-$(document).ready(function() {
+frappe.ready(function() {
   $('#profile-save').off('click').on('click', function() {
     console.log("Profile save button clicked");
     var employee_id = $('#employee-name').val();
