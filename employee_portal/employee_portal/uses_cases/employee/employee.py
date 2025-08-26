@@ -8,7 +8,7 @@ def save_profile(employee_id, data):
 
     employee = frappe.get_doc("Employee", employee_id)
 
-    if employee.user_id != current_user:
+    if employee.user_id.lower() != current_user.lower():
       return {
         "status": "error",
         "error": "No tienes permiso para editar este perfil.",
