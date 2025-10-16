@@ -147,6 +147,9 @@ web_include_js = "/assets/employee_portal/js/employee_portal.js"
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
 
+get_website_user_homepage = (
+  "employee_portal.employee_portal.services.redirect_after_login.handler"
+)
 
 # User Data Protection
 # --------------------
