@@ -11,18 +11,23 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 {% endblock %}
 {% set modules = [
-    {"name": "Inicio", "url": "/portal", "icon": "home"},
-    {"name": "Mis Datos", "url": "/portal/profile", "icon": "person"},
-    {"name": "Mis Evaluaciones", "url": "/portal/evaluations", "icon": "bar_chart"},
-    {"name": "Mis Eventos", "url": "/portal/events", "icon": "event"},
-    {"name": "Mis Permisos/Ausencias", "url": "/portal/leave_application", "icon": "schedule"},
-    {"name": "Mis Vacaciones", "url": "/portal/vacations", "icon": "beach_access"},
-    {"name": "Mis Beneficios", "url": "/portal/benefits", "icon": "card_giftcard"},
-    {"name": "Documentos y Políticas", "url": "/portal/documents", "icon": "description"},
-    {"name": "Soporte", "url": "/portal/help", "icon": "help"}
+  {"name": "Inicio", "url": "/portal", "icon": "home"},
+  {"name": "Mis Datos", "url": "/portal/profile", "icon": "person"},
+  {"name": "Mis Evaluaciones", "url": "/portal/evaluations", "icon": "bar_chart"},
+  {"name": "Mis Eventos", "url": "/portal/events", "icon": "event"},
+  {"name": "Mis Permisos/Ausencias", "url": "/portal/leave_application", "icon": "schedule"},
+  {"name": "Mis Vacaciones", "url": "/portal/vacations", "icon": "beach_access"},
+  {"name": "Mis Beneficios", "url": "/portal/benefits", "icon": "card_giftcard"},
+  {"name": "Documentos y Políticas", "url": "/portal/documents", "icon": "description"},
+  {"name": "Soporte", "url": "/portal/help", "icon": "help"}
 ] %}
 <!--{"name": "Mi Dotación", "url": "/portal/endowment", "icon": "inventory"},-->
 {% block content %}
+<div id="loader-overlay">
+  <svg class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+  </svg>
+</div>
 <div id="wrapper" class="menuDisplayed employee_portal">
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
