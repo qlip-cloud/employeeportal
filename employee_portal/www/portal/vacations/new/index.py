@@ -1,6 +1,5 @@
 import frappe
 from frappe.utils import getdate, nowdate, date_diff # type: ignore
-from employee_portal.employee_portal.services.employee.leave_application import save_application # type: ignore
 from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
 
 
