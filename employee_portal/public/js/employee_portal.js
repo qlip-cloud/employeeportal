@@ -183,18 +183,7 @@ function initEmployeePortalEvents(){
       });
       return;
     }
-
-    // Validación 32 horas MENTUM
-    var remainingMentumHours = $('#remaining_mentum_hours').val();
-
-    if (diffHours > remainingMentumHours) {
-      frappe.msgprint({
-        title: 'Error',
-        message: 'Solo tienes ' + remainingMentumHours + ' horas de permiso disponibles.',
-        indicator: 'red',
-      });
-      return;
-    }
+    
 
     var data = {
       'employee' : $('#employee-name').val(),

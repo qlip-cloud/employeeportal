@@ -59,6 +59,9 @@ def create_leave_application(data):
     pero con validaciones y limpieza previas.
     """
     try:
+        if isinstance(data, str):
+            data = json.loads(data)
+
         # Limpieza básica de campos
         for key in ["from_datetime", "to_datetime"]:
             if data.get(key):
@@ -93,7 +96,7 @@ def create_leave_application(data):
         })
 
         # Inserta e ignora permisos (útil si lo hace el propio empleado)
-        doc.insert(ignore_permissions=True)
+        doc.insert(ignore_permissions=True, ignore_validate=True)
         frappe.db.commit()
 
         # Devuelve respuesta
@@ -172,7 +175,7 @@ def create_leave_application_vacation_type(data):
         })
 
         # Guardar
-        doc.insert(ignore_permissions=True)
+        doc.insert(ignore_permissions=True, ignore_validate=True)
         frappe.db.commit()
 
         return {
