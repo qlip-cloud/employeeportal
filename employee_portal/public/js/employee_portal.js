@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  $('#profile-save').off('click').on('click', function() {
+function initEmployeePortalEvents(){
+    $('#profile-save').off('click').on('click', function() {
     $("#loader-overlay").fadeIn(200);
     var employee_id = $('#employee-name').val();
     var data = {
@@ -58,7 +58,7 @@ $(document).ready(function() {
     });
   });
 
-  $('#send-application').off('click').on('click', function() {
+  $('#send-vacation').off('click').on('click', function() {
     var employee_id = $('#employee-name').val();
 
     // Validación días mínimos de vacaciones
@@ -131,7 +131,7 @@ $(document).ready(function() {
     }
 
     frappe.call({
-      method: 'employee_portal.www.employee_portal.leave_application.new.index.send_application',
+      method: 'employee_portal.employee_portal.uses_cases.employee.employee.create_leave_application_vacation_type',
       args: {
         employee_id: employee_id,
         data: data
@@ -158,10 +158,12 @@ $(document).ready(function() {
 
   $('#send-application').off('click').on('click', function() {
     var employee_id = $('#employee-name').val();
-    var fromDate = new Date($('#from-datetime').val());
-    var toDate = new Date($('#to-datetime').val());
+    var fromDatetime = new Date($('#from-datetime').val());
+    var toDatetime = new Date($('#to-datetime').val());
+    var fromDate = fromDatetime.toISOString().split('T')[0];
+    var toDate = toDatetime.toISOString().split('T')[0];
 
-    var diffMs = toDate - fromDate;
+    var diffMs = toDatetime - fromDatetime;
     var diffHours = diffMs / (1000 * 60 * 60);
 
     if (diffHours < 1) {
@@ -202,13 +204,15 @@ $(document).ready(function() {
       'leave_approver' : $('#leave-approver').val(),
       'leave_type' : $('#leave-type').val(),
       'posting_date' : $('#posting-date').val(),
-      'from_date' : $('#from-datetime').val(),
-      'to_date' : $('#to-datetime').val(),
+      'from_date' : fromDate,
+      'to_date' : toDate,
+      'from_datetime' : $('#from-datetime').val(),
+      'to_datetime' : $('#to-datetime').val(),
       'description' : $('#description').val(),
       'status' : $('#leave-status').val(),
       
     };
-    if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.leave_type || !data.status || !data.from_date || !data.to_date || !data.description) {
+    if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.leave_type || !data.status || !data.from_datetime || !data.to_datetime || !data.description) {
       frappe.msgprint({
         title: 'Error',
         message: 'Por favor, completa los campos obligatorios',
@@ -217,9 +221,8 @@ $(document).ready(function() {
       return;
     }
     frappe.call({
-      method: 'employee_portal.www.employee_portal.leave_application.new.index.send_application',
+      method: 'employee_portal.employee_portal.uses_cases.employee.employee.create_leave_application',
       args: {
-        employee_id: employee_id,
         data: data
       },
       callback: function(r) {
@@ -245,5 +248,14 @@ $(document).ready(function() {
     });
   });
 
-  
+}
+
+
+$(document).ready(function() {
+  initEmployeePortalEvents();
+});
+
+
+$(document).on('router:page_loaded', function(e, url) {
+  initEmployeePortalEvents();
 });
