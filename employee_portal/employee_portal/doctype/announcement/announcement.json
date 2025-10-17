@@ -28,7 +28,7 @@
   },
   {
    "fieldname": "content",
-   "fieldtype": "Text",
+   "fieldtype": "Text Editor",
    "in_list_view": 1,
    "label": "Descripci\u00f3n",
    "reqd": 1
@@ -48,7 +48,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 16:22:52.635410",
+ "modified": "2025-10-16 18:57:45.828682",
  "modified_by": "Administrator",
  "module": "Employee Portal",
  "name": "Announcement",
