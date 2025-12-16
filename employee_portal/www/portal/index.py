@@ -7,7 +7,7 @@ from employee_portal.employee_portal.uses_cases.employee.employee import get_ann
 def get_context(context):
   is_guest()
   is_employee()
-  context.employee = get_employee
+  context.employee = get_employee()
 
   # Fetch announcements
   context.announcements = get_announcements()

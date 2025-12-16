@@ -1,27 +1,32 @@
 {% extends "employee_portal/templates/includes/base.html" %}
 
 {% block title %}{{ ("Detalle de Evaluación de Desempeño") }}{% endblock %}
-{% block page_content %} 
+{% block page_content %}
 <style>
-  .frappe-card{
+  .frappe-card {
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid #e8e8e8;
     border-radius: 10px;
   }
+
   .frappe-control {
     margin-bottom: 15px;
   }
+
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
   }
-  table th, table td {
+
+  table th,
+  table td {
     border: 1px solid #e8e8e8;
     padding: 8px;
     text-align: left;
   }
+
   table th {
     background-color: #f8f9fa;
   }
@@ -57,7 +62,7 @@
               <input type="text" class="form-control" value="{{ evaluation.appraisal_date }}" readonly>
             </div>
           </div>
-    
+
         </div>
       </div>
 
@@ -76,13 +81,18 @@
           </thead>
           <tbody>
             {% for goal in evaluation.goals %}
-              <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ goal.kra }}</td>
-                <td>{{ goal.score }}</td>
-                <td>{{ goal.self_assessment }}</td>
-                <td>{{ goal.score_earned }}</td>
-              </tr>
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ goal.kra }}</td>
+              <td>{{ goal.score }}</td>
+              <td>
+                <input type="number" class="form-control goal-self-assessment" 
+                       data-goal-name="{{ goal.name }}" 
+                       value="{{ goal.self_assessment or '' }}" 
+                       min="0" max="5" step="0.1">
+              </td>
+              <td>{{ goal.score_earned }}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
@@ -91,7 +101,7 @@
       <!-- Fortalezas -->
       <div class="frappe-card">
         <h3>Fortalezas de Desempeño</h3>
-        <textarea class="form-control" rows="3" readonly>{{ evaluation.remarks }}</textarea>
+        <textarea class="form-control" rows="3" id="remarks">{{ evaluation.remarks or '' }}</textarea>
       </div>
 
       <!-- Plan de Acción -->
@@ -101,19 +111,19 @@
           <div class="col-md-4">
             <div class="frappe-control">
               <label>Acciones de Mejora</label>
-              <textarea class="form-control" rows="3" readonly>{{ evaluation.stop_action }}</textarea>
+              <textarea class="form-control" rows="3" id="stop-action">{{ evaluation.stop_action or '' }}</textarea>
             </div>
           </div>
           <div class="col-md-4">
             <div class="frappe-control">
               <label>Buenas Prácticas</label>
-              <textarea class="form-control" rows="3" readonly>{{ evaluation.continue_action }}</textarea>
+              <textarea class="form-control" rows="3" id="continue-action">{{ evaluation.continue_action or '' }}</textarea>
             </div>
           </div>
           <div class="col-md-4">
             <div class="frappe-control">
               <label>Lecciones Aprendidas</label>
-              <textarea class="form-control" rows="3" readonly>{{ evaluation.start_action }}</textarea>
+              <textarea class="form-control" rows="3" id="start-action">{{ evaluation.start_action or '' }}</textarea>
             </div>
           </div>
         </div>
@@ -133,19 +143,29 @@
             </tr>
           </thead>
           <tbody>
-            {% for competency in evaluation.supervisor_feedback  %}
-              <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ competency.kra }}</td>
-                <td>{{ competency.per_weightage }}</td>
-                <td>{{ competency.score }}</td>
-                <td>{{ competency.score_earned }}</td>
-              </tr>
+            {% for competency in evaluation.supervisor_feedback %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ competency.kra }}</td>
+              <td>{{ competency.per_weightage }}</td>
+              <td>{{ competency.score }}</td>
+              <td>
+                <input type="number" class="form-control supervisor-score" 
+                       data-supervisor-name="{{ competency.name }}" 
+                       value="{{ competency.score_earned or '' }}" 
+                       min="0" max="5" step="0.1">
+              </td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
-
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <input type="hidden" id="appraisal-name" value="{{ evaluation.name }}">
+          <input type="button" id="appraisal-save" value="Guardar" class="btn btn-save">
+        </div>
+      </div>
     </div>
   </div>
 </div>

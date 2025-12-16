@@ -1,5 +1,5 @@
-function initEmployeePortalEvents(){
-    $('#profile-save').off('click').on('click', function() {
+function initEmployeePortalEvents() {
+  $('#profile-save').off('click').on('click', function () {
     $("#loader-overlay").fadeIn(200);
     var employee_id = $('#employee-name').val();
     var data = {
@@ -33,7 +33,7 @@ function initEmployeePortalEvents(){
         employee_id: employee_id,
         data: data
       },
-      callback: function(r) {
+      callback: function (r) {
         $("#loader-overlay").fadeOut(200);
         response = r.message;
         console.log(response);
@@ -58,7 +58,7 @@ function initEmployeePortalEvents(){
     });
   });
 
-  $('#send-vacation').off('click').on('click', function() {
+  $('#send-vacation').off('click').on('click', function () {
     var employee_id = $('#employee-name').val();
 
     // Validación días mínimos de vacaciones
@@ -136,7 +136,7 @@ function initEmployeePortalEvents(){
         employee_id: employee_id,
         data: data
       },
-      callback: function(r) {
+      callback: function (r) {
         var response = r.message;
         if (response.status == 'success') {
           frappe.msgprint({
@@ -144,7 +144,7 @@ function initEmployeePortalEvents(){
             message: 'Tu solicitud de vacaciones ha sido enviada',
             indicator: 'green',
           });
-          loadModule('/employee_portal/vacations');
+          loadModule('portal/vacations');
         } else {
           frappe.msgprint({
             title: 'Error',
@@ -156,7 +156,7 @@ function initEmployeePortalEvents(){
     });
   });
 
-  $('#send-application').off('click').on('click', function() {
+  $('#send-application').off('click').on('click', function () {
     var employee_id = $('#employee-name').val();
     var fromDatetime = new Date($('#from-datetime').val());
     var toDatetime = new Date($('#to-datetime').val());
@@ -184,33 +184,22 @@ function initEmployeePortalEvents(){
       return;
     }
 
-    // Validación 32 horas MENTUM
-    var remainingMentumHours = $('#remaining_mentum_hours').val();
-
-    if (diffHours > remainingMentumHours) {
-      frappe.msgprint({
-        title: 'Error',
-        message: 'Solo tienes ' + remainingMentumHours + ' horas de permiso disponibles.',
-        indicator: 'red',
-      });
-      return;
-    }
 
     var data = {
-      'employee' : $('#employee-name').val(),
-      'employee_name' : $('#employee-full-name').val(),
-      'company' : $('#company').val(),
-      'department' : $('#department').val(),
-      'leave_approver' : $('#leave-approver').val(),
-      'leave_type' : $('#leave-type').val(),
-      'posting_date' : $('#posting-date').val(),
-      'from_date' : fromDate,
-      'to_date' : toDate,
-      'from_datetime' : $('#from-datetime').val(),
-      'to_datetime' : $('#to-datetime').val(),
-      'description' : $('#description').val(),
-      'status' : $('#leave-status').val(),
-      
+      'employee': $('#employee-name').val(),
+      'employee_name': $('#employee-full-name').val(),
+      'company': $('#company').val(),
+      'department': $('#department').val(),
+      'leave_approver': $('#leave-approver').val(),
+      'leave_type': $('#leave-type').val(),
+      'posting_date': $('#posting-date').val(),
+      'from_date': fromDate,
+      'to_date': toDate,
+      'from_datetime': $('#from-datetime').val(),
+      'to_datetime': $('#to-datetime').val(),
+      'description': $('#description').val(),
+      'status': $('#leave-status').val(),
+
     };
     if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.leave_type || !data.status || !data.from_datetime || !data.to_datetime || !data.description) {
       frappe.msgprint({
@@ -225,7 +214,7 @@ function initEmployeePortalEvents(){
       args: {
         data: data
       },
-      callback: function(r) {
+      callback: function (r) {
         response = r.message;
         if (response.status == 'success') {
           frappe.msgprint(
@@ -235,7 +224,7 @@ function initEmployeePortalEvents(){
               indicator: 'green',
             }
           );
-        loadModule('/employee_portal/leave_application');
+          loadModule('portal/leave_application');
         } else {
           frappe.msgprint({
             title: 'Error',
@@ -247,15 +236,90 @@ function initEmployeePortalEvents(){
       }
     });
   });
-
+  $('#appraisal-save').off('click').on('click', function() {
+    var appraisal_name = $('#appraisal-name').val();
+    
+    var goals = [];
+    $('.goal-self-assessment').each(function() {
+      goals.push({
+        name: $(this).data('goal-name'),
+        self_assessment: parseFloat($(this).val()) || 0
+      });
+    });
+    
+  
+    var supervisor_feedback = [];
+    $('.supervisor-score').each(function() {
+      supervisor_feedback.push({
+        name: $(this).data('supervisor-name'),
+        score_earned: parseFloat($(this).val()) || 0
+      });
+    });
+    
+    var  remarks = $('#remarks').val();
+    var stop_action = $('#stop-action').val();
+    var continue_action = $('#continue-action').val();
+    var start_action = $('#start-action').val();
+    var valid = true;
+    goals.forEach(function(goal) {
+      if (goal.self_assessment < 0 || goal.self_assessment > 5) {
+        valid = false;
+      }
+    });
+    supervisor_feedback.forEach(function(feedback) {
+      if (feedback.score_earned < 0 || feedback.score_earned > 5) {
+        valid = false;
+      }
+    });
+    
+    if (!valid) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'Las puntuaciones deben estar entre 0 y 5',
+        indicator: 'red',
+      });
+      return;
+    }
+    
+    // Enviar datos al backend
+    frappe.call({
+      method: 'employee_portal.employee_portal.uses_cases.employee.employee.update_employee_appraisal',
+      freeze: true,
+      args: {
+        appraisal_name: appraisal_name,
+        goals: goals,
+        remarks: remarks,
+        stop_action: stop_action,
+        continue_action: continue_action,
+        start_action: start_action,
+        supervisor_feedback: supervisor_feedback
+      },
+      callback: function(r) {
+        var response = r.message;
+        if (response.status == 'success') {
+          frappe.msgprint({
+            title: 'Notificación',
+            message: 'La evaluación ha sido actualizada correctamente',
+            indicator: 'green',
+          });
+        } else {
+          frappe.msgprint({
+            title: 'Error',
+            message: response.message || 'Ocurrió un error al guardar',
+            indicator: 'red',
+          });
+        }
+      }
+    });
+  });
 }
 
 
-$(document).ready(function() {
+$(document).ready(function () {
   initEmployeePortalEvents();
 });
 
 
-$(document).on('router:page_loaded', function(e, url) {
+$(document).on('router:page_loaded', function (e, url) {
   initEmployeePortalEvents();
 });
