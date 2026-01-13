@@ -92,6 +92,19 @@ def create_leave_application(data):
                     "message": _(f"Falta el campo requerido: {field}"),
                 }
 
+        # Calcular duración de solicitud en días u horas, segun corresponda
+        if data.get("from_date") and data.get("to_date"):
+            from_date = frappe.utils.getdate(data["from_date"])
+            to_date = frappe.utils.getdate(data["to_date"])
+            diff_days = (to_date - from_date).days + 1  # Incluir día final
+
+            if diff_days >= 1:
+                data["total_leave_days"] = diff_days
+            else:
+                from_datetime = frappe.utils.get_datetime(data["from_datetime"])
+                to_datetime = frappe.utils.get_datetime(data["to_datetime"])
+                diff_hours = (to_datetime - from_datetime).total_seconds() / 3600
+                data["total_leave_days"] = diff_hours
         # Crear doc
         doc = frappe.get_doc(
             {
@@ -107,6 +120,7 @@ def create_leave_application(data):
                 "to_date": data.get("to_date"),
                 "from_datetime": data.get("from_datetime"),
                 "to_datetime": data.get("to_datetime"),
+                "total_leave_days": data.get("total_leave_days"),
                 "description": data.get("description"),
                 "status": data.get("status", "Open"),
             }
