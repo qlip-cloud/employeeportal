@@ -6,18 +6,19 @@ function initEmployeePortalEvents() {
       'first_name': $('#first_name').val(),
       'middle_name': $('#middle_name').val(),
       'last_name': $('#last_name').val(),
+      'employee_id_number': $('#employee_id_number').val(),
       'dob': $('#dob').val(),
       'gender': $('#gender').val(),
-      'employee_number': $('#employee-number').val(),
-      'emergency_phone': $('#emergency-phone').val(),
-      'emergency_contact': $('#emergency-contact').val(),
+      'cell_number': $('#employee-number').val(),
+      'emergency_phone_number': $('#emergency-phone').val(),
+      'person_to_be_contacted': $('#emergency-contact').val(),
       'relation': $('#relation').val(),
       'current_accommodation_type': $('#current_accommodation_type').val(),
       'current_address': $('#current_address').val(),
       'health_details': $('#health_details').val(),
       'family_background': $('#family_background').val()
     };
-    if (!data.first_name || !data.last_name || !data.dob || !data.gender) {
+    if (!data.first_name || !data.last_name || !data.dob || !data.gender || !data.employee_id_number) {
       $("#loader-overlay").fadeOut(200);
       frappe.msgprint({
         title: 'Error',
@@ -82,21 +83,44 @@ function initEmployeePortalEvents() {
     if (diffDays > remainigVacationDays) {
       frappe.msgprint({
         title: 'Error',
-        message: 'Solo tienes ' + remainigVacationDays + ' días de vacaciones disponibles.',
+        message: 'Solo tienes ' + remainigVacationDays + ' días de vacaciones disponibles durante el período seleccionado.',
         indicator: 'red',
       });
       return;
     }
 
-    // Validación solicitud realizada con al menos dos meses de anticipación
+    // Validación solicitud realizada con al menos un mes de anticipación
     var today = new Date();
     var requestedDate = new Date($('#from-datetime').val());
     var minRequestDate = new Date();
-    minRequestDate.setDate(today.getDate() + 60);
+    minRequestDate.setDate(today.getDate() + 30);
     if (requestedDate < minRequestDate) {
       frappe.msgprint({
         title: 'Error',
-        message: 'La solicitud debe ser realizada con al menos 2 meses de anticipación.',
+        message: 'La solicitud debe ser realizada con al menos 1 mes de anticipación.',
+        indicator: 'red',
+      });
+      return;
+    }
+
+    // Validación período trabajado
+    var periodFrom = new Date($('#period-from').val());
+    var periodTo = new Date($('#period-to').val());
+    if (periodFrom >= periodTo) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'La fecha de "Período Desde" debe ser anterior a la fecha de "Período Hasta".',
+        indicator: 'red',
+      });
+      return;
+    }
+    // Validación período trabajado de un año mínimo
+    var periodDiffMs = periodTo - periodFrom;
+    var periodDiffDays = periodDiffMs / (1000 * 60 * 60 * 24);
+    if (periodDiffDays < 365) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'El período trabajado debe ser de al menos un año.',
         indicator: 'red',
       });
       return;
@@ -122,6 +146,7 @@ function initEmployeePortalEvents() {
     };
 
     if (!data.employee || !data.posting_date || !data.department || !data.employee_name || !data.status || !data.from_date || !data.to_date || !data.description) {
+      console.log(data);
       frappe.msgprint({
         title: 'Error',
         message: 'Por favor, completa los campos obligatorios',
@@ -170,6 +195,16 @@ function initEmployeePortalEvents() {
       frappe.msgprint({
         title: 'Error',
         message: 'El permiso debe ser de al menos 1 hora.',
+        indicator: 'red',
+      });
+      return;
+    }
+
+    leave_type = $('#leave-type').val();
+    if (leave_type == 'Horas Mentum' && diffHours>24) {
+      frappe.msgprint({
+        title: 'Error',
+        message: 'El permiso de Horas Mentum no puede exceder 24 horas.',
         indicator: 'red',
       });
       return;

@@ -79,14 +79,14 @@
           <div class="col-md-6">
             <div class="frappe-control">
               <label for="from-datetime">Desde</label>
-              <input type="datetime-local" id="from-datetime" class="form-control" value="{{ leave.from_date }}"
+              <input type="date" id="from-datetime" class="form-control" value="{{ leave.from_date }}"
                 readonly>
             </div>
           </div>
           <div class="col-md-6">
             <div class="frappe-control">
               <label for="to-datetime">Hasta</label>
-              <input type="datetime-local" id="to-datetime" class="form-control" value="{{ leave.to_date }}" readonly>
+              <input type="date" id="to-datetime" class="form-control" value="{{ leave.to_date }}" readonly>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@
           <div class="col-md-4">
             <div class="frappe-control">
               <label for="total-hours">Total de Horas</label>
-              <input type="text" id="total-hours" class="form-control" value="{{ leave.total_leave_hours }}" readonly>
+              <input type="text" id="total-hours" class="form-control" value="{{ leave.total_leave_hours if leave.total_leave_hours else '' }}" readonly>
             </div>
           </div>
         </div>

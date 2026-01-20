@@ -65,7 +65,9 @@
               <label for="leave-type">Tipo de Permiso</label>
               <select id="leave-type" name="leave_type" class="form-control">
                 {% for leave_type in leave_types %}
+                {% if leave_type.name != "Vacaciones" %}
                 <option value="{{ leave_type.name }}">{{ leave_type.name }}</option>
+                {% endif %}
                 {% endfor %}
               </select>
             </div>
@@ -79,12 +81,14 @@
             <div class="frappe-control">
               <label for="from-datetime">Desde</label>
               <input type="datetime-local" id="from-datetime" name="from_datetime" class="form-control">
+              <small style="font-style: italic;">Ingrese fecha y hora de inicio</small>
             </div>
           </div>
           <div class="col-md-6">
             <div class="frappe-control">
               <label for="to-datetime">Hasta</label>
               <input type="datetime-local" id="to-datetime" name="to_datetime" class="form-control">
+              <small style="font-style: italic;">Ingrese fecha y hora de finalización</small>
             </div>
           </div>
         </div>
@@ -100,11 +104,10 @@
 
       <div class="row">
         <div class="col-md-12 text-right">
-          <input type="button" id="send-application" value="Enviar Solicitud" class="btn btn-outline-primary">
+          <input type="button" id="send-application" value="Enviar Solicitud" class="btn btn-save">
         </div>
       </div>
     </div>
   </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}

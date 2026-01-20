@@ -91,20 +91,57 @@ def create_leave_application(data):
                     "status": "error",
                     "message": _(f"Falta el campo requerido: {field}"),
                 }
+            
+        if data["leave_type"].lower() == "permiso personal" or data["leave_type"].lower() == "calamidad doméstica":
+            mentum_hours = 32
+            existing_leaves = frappe.db.get_all(
+                "Leave Application",
+                filters={
+                    "employee": data["employee"],
+                    "leave_type": ["in", ["Permiso Personal", "Calamidad Doméstica"]],
+                    "status": ["in", ["Approved"]],
+                },
+                fields=["total_leave_hours"],
+            )
+            used_hours = sum(leave.total_leave_hours for leave in existing_leaves)
+            available_hours = mentum_hours - used_hours
+            if available_hours <= 0:
+                return {
+                    "status": "error",
+                    "message": _("No tienes horas de Mentum disponibles para este tipo de permiso."),
+                }
+            # Calcular duración en horas
+            from_datetime = frappe.utils.get_datetime(data["from_datetime"])
+            to_datetime = frappe.utils.get_datetime(data["to_datetime"])
+            requested_hours = (to_datetime - from_datetime).total_seconds() / 3600
+            if requested_hours > available_hours:
+                return {
+                    "status": "error",
+                    "message": _(f"No tienes suficientes horas de Mentum disponibles. Horas disponibles: {available_hours}, Horas solicitadas: {requested_hours}."),
+                }
+            
+            if not data.get("description"):
+                return {
+                    "status": "error",
+                    "message": _("La descripción es obligatoria para Permiso Personal."),
+                }
 
         # Calcular duración de solicitud en días u horas, segun corresponda
         if data.get("from_date") and data.get("to_date"):
             from_date = frappe.utils.getdate(data["from_date"])
             to_date = frappe.utils.getdate(data["to_date"])
-            diff_days = (to_date - from_date).days + 1  # Incluir día final
+            diff_days = (to_date - from_date).days
 
             if diff_days >= 1:
                 data["total_leave_days"] = diff_days
+                data["total_leave_hours"] = 0
             else:
+                # Mismo día - calcular en horas
                 from_datetime = frappe.utils.get_datetime(data["from_datetime"])
                 to_datetime = frappe.utils.get_datetime(data["to_datetime"])
                 diff_hours = (to_datetime - from_datetime).total_seconds() / 3600
-                data["total_leave_days"] = diff_hours
+                data["total_leave_hours"] = diff_hours
+                data["total_leave_days"] = 0
         # Crear doc
         doc = frappe.get_doc(
             {
@@ -121,6 +158,7 @@ def create_leave_application(data):
                 "from_datetime": data.get("from_datetime"),
                 "to_datetime": data.get("to_datetime"),
                 "total_leave_days": data.get("total_leave_days"),
+                "total_leave_hours": data.get("total_leave_hours"),
                 "description": data.get("description"),
                 "status": data.get("status", "Open"),
             }
@@ -202,24 +240,7 @@ def create_leave_application_vacation_type(data):
         to_date = frappe.utils.getdate(data["to_date"])
         today = frappe.utils.getdate()
 
-        # Validar duración mínima de 6 días
-        diff_days = (to_date - from_date).days
-        if diff_days < 6:
-            return {
-                "status": "error",
-                "message": _("El período de vacaciones debe ser de al menos 6 días."),
-            }
-
-        # Validar solicitud con 2 meses de anticipación
-        min_request_date = frappe.utils.add_days(today, 60)
-        if from_date < min_request_date:
-            return {
-                "status": "error",
-                "message": _(
-                    "La solicitud debe hacerse con al menos 2 meses de anticipación."
-                ),
-            }
-
+    
         # Crear el documento
         doc = frappe.get_doc(
             {

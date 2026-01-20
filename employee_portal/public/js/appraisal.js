@@ -149,3 +149,4 @@ frappe.ui.form.on('Appraisal Supervisor Goal', {
 		frm.trigger('set_supervisor_score_earned');
 	}
 });
+
