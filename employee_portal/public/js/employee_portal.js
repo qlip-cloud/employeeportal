@@ -185,12 +185,14 @@ function initEmployeePortalEvents() {
     var employee_id = $('#employee-name').val();
     var fromDatetime = new Date($('#from-datetime').val());
     var toDatetime = new Date($('#to-datetime').val());
-    if (fromDatetime){
+    
+    // Validar que las fechas sean válidas
+    if (!isNaN(fromDatetime.getTime())){
       var fromDate = fromDatetime.toISOString().split('T')[0];
     } else{
       var fromDate = null;
     }
-    if (toDatetime){
+    if (!isNaN(toDatetime.getTime())){
       var toDate = toDatetime.toISOString().split('T')[0];
     }else{
       var toDate = null;
