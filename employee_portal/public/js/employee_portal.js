@@ -347,6 +347,10 @@ function initEmployeePortalEvents() {
       }
     });
   });
+  $('#table-applications').DataTable();
+  $('#table-leaves').DataTable();
+  $('#activeEvaluationsTable').DataTable();
+  $('#completedEvaluationsTable').DataTable();
 }
 
 
