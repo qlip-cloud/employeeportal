@@ -185,8 +185,16 @@ function initEmployeePortalEvents() {
     var employee_id = $('#employee-name').val();
     var fromDatetime = new Date($('#from-datetime').val());
     var toDatetime = new Date($('#to-datetime').val());
-    var fromDate = fromDatetime.toISOString().split('T')[0];
-    var toDate = toDatetime.toISOString().split('T')[0];
+    if (fromDatetime){
+      var fromDate = fromDatetime.toISOString().split('T')[0];
+    } else{
+      var fromDate = null;
+    }
+    if (toDatetime){
+      var toDate = toDatetime.toISOString().split('T')[0];
+    }else{
+      var toDate = null;
+    }
 
     var diffMs = toDatetime - fromDatetime;
     var diffHours = diffMs / (1000 * 60 * 60);
