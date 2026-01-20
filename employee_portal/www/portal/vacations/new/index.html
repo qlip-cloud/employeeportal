@@ -54,8 +54,8 @@
           </div>
           <div class="col-md-6">
             <div class="frappe-control">
-              <label for="employee-id">ID del Empleado</label>
-              <input type="text" id="employee-id" name="employee_id" class="form-control" value="{{ employee.name }}"
+              <label for="employee-id-number">Número de Identificación</label>
+              <input type="text" id="employee-id-number" name="employee_id_number" class="form-control" value="{{ employee.employee_id_number }}"
                 readonly>
             </div>
           </div>
@@ -69,12 +69,14 @@
                 <option value="{{ emp.name }}">{{ emp.employee_name }}</option>
                 {% endfor %}
               </select>
+              <small style="font-style: italic;">Selecciona un empleado de la lista que pueda cubrir tus responsabilidades durante tu ausencia.</small>
             </div>
           </div>
         </div>
       </div>
       <div class="frappe-card">
         <h3>Período Trabajado</h3>
+        <small style="font-style: italic;">Indica el período durante el cual has trabajado para el cual estás solicitando vacaciones.</small>
         <div class="row">
           <div class="col-md-6">
             <div class="frappe-control">
@@ -118,11 +120,10 @@
 
       <div class="row">
         <div class="col-md-12 text-right">
-          <input type="button" id="send-vacation" value="Enviar Solicitud" class="btn btn-outline-primary">
+          <input type="button" id="send-vacation" value="Enviar Solicitud" class="btn btn-save">
         </div>
       </div>
     </div>
   </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}

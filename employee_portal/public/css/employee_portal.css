@@ -167,3 +167,16 @@
   background-color: #e66a3f;
   color: #fff;
 } 
+
+.btn-save-outline {
+  background-color: transparent;
+  color: #FF7A50;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-save-outline:hover {
+  background-color: #FF7A50;
+  color: #fff;
+}

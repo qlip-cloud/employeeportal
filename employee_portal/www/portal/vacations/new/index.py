@@ -41,4 +41,4 @@ def get_context(context):
       context.remaining_vacation_days = round(remaining_vacation_days, 2)
   else:
       context.remaining_vacation_days = 0
-  return context
+  return context    

@@ -1,9 +1,14 @@
 import frappe
 from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
 
+
 def get_context(context):
-  is_guest()
-  is_employee()
-  context.employee = get_employee()
-  context.leaves = frappe.get_all("Leave Application", filters={"employee": context.employee.name}, fields=["*"])
-  return context
+    is_guest()
+    is_employee()
+    context.employee = get_employee()
+    context.leaves = frappe.get_all(
+      "Leave Application",
+      filters={"employee": context.employee.name, "leave_type": ["!=", "vacaciones"]},
+      fields=["*"],
+    )
+    return context

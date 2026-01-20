@@ -37,8 +37,8 @@ web_include_js = "/assets/employee_portal/js/employee_portal.js"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_js = {"Appraisal" : "public/js/appraisal.js"}
+doctype_list_js = {"Appraisal" : "public/js/appraisal_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
