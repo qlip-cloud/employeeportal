@@ -11,6 +11,5 @@ def handler(user=None):
 
     if "Employee" in roles:
         return "/portal"
-
-
-    return "/"
+    else:
+        return "/tickets"

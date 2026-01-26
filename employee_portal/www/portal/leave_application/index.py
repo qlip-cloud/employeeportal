@@ -11,4 +11,5 @@ def get_context(context):
       filters={"employee": context.employee.name, "leave_type": ["!=", "vacaciones"]},
       fields=["*"],
     )
+    context.remaining_mentum_hours = 32
     return context

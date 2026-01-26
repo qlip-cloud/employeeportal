@@ -51,7 +51,7 @@
           <div class="col-md-6">
             <div class="frappe-control">
               <label>Estado</label>
-              <input type="text" class="form-control" value="{{ evaluation.status }}" readonly>
+              <input type="text" class="form-control" value="{{ _(evaluation.status) }}" readonly>
             </div>
           </div>
         </div>
@@ -62,7 +62,20 @@
               <input type="text" class="form-control" value="{{ evaluation.appraisal_date }}" readonly>
             </div>
           </div>
-
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label>Evaluador:</label>
+              <input type="text" class="form-control" value="{{ evaluation.appraiser if evaluation.appraiser else branch_leader }}" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label>Banda:</label>
+              <input type="text" class="form-control" value="{{ evaluation.branch if evaluation.branch else employee.branch }}" readonly>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -101,7 +114,7 @@
       <!-- Fortalezas -->
       <div class="frappe-card">
         <h3>Fortalezas de Desempeño</h3>
-        <textarea class="form-control" rows="3" id="remarks">{{ evaluation.remarks or '' }}</textarea>
+        <textarea class="form-control" rows="3" id="remarks">{{ evaluation.remarks or '' }}</textarea {% if not is_editable %}readonly{% endif %}>
       </div>
 
       <!-- Plan de Acción -->
