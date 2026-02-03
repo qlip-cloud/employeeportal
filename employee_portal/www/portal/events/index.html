@@ -9,9 +9,9 @@
   <div class="row">
       <div class="col-md-12">
           <h2>Calendario de Eventos</h2>
+          <input type="hidden" name="events_data" id="events_data" value='{{ events | safe }}'>
           <div id="calendar"></div>
       </div>
   </div>
 </div>
-<script src="events/index.js"></script>
 {% endblock %}

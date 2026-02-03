@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      {% if leaves %}
+      {% if vacations %}
       <table class="table table-bordered frappe-list display" id="table-applications" style="width: 100%;">
         <thead>
           <tr>
@@ -26,20 +26,18 @@
           </tr>
         </thead>
         <tbody>
-          {% for leave in leaves %}
-          {% if leave.leave_type == "Vacaciones" %}
+          {% for leave in vacations %}
           <tr>
             <td>{{ leave.from_date }}</td>
             <td>{{ leave.to_date }}</td>
             <td>{{ leave.status }}</td>
             <td class="text-center">
-              <a href="vacations/details?name={{ leave.name }}" data-url="vacations/details?name={{ leave.name }}"
+              <a href="/portal/vacations/details?name={{ leave.name }}" data-url="/portal/vacations/details?name={{ leave.name }}"
                 class="module-link">
                 <span class="material-symbols-outlined" style="color: #757371;">visibility</span>
               </a>
             </td>
           </tr>
-          {% endif %}
           {% endfor %}
 
         </tbody>

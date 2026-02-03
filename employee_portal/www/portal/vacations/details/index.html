@@ -53,24 +53,6 @@
       </div>
 
 
-      <!-- Período Trabajado -->
-      <div class="frappe-card">
-        <h3>Período Trabajado</h3>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="frappe-control">
-              <label for="period-from">Período desde</label>
-              <input type="date" id="period-from" class="form-control" value="{{ leave.period_from }}" readonly>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="frappe-control">
-              <label for="period-to">Período hasta</label>
-              <input type="date" id="period-to" class="form-control" value="{{ leave.period_to }}" readonly>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Tiempo Solicitado -->
       <div class="frappe-card">
@@ -91,18 +73,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="frappe-control">
               <label for="total-days">Total de Días</label>
               <input type="text" id="total-days" class="form-control" value="{{ leave.total_leave_days }}" readonly>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="frappe-control">
-              <label for="total-hours">Total de Horas</label>
-              <input type="text" id="total-hours" class="form-control" value="{{ leave.total_leave_hours if leave.total_leave_hours else '' }}" readonly>
-            </div>
-          </div>
+          
         </div>
       </div>
 
@@ -177,7 +154,7 @@
 
       <div class="row">
         <div class="col-md-12 text-right">
-          <a href="/employee_portal/vacations/" class="btn btn-outline-primary">Listo</a>
+          <a href="/portal/vacations/" class="module-link btn btn-save-outline">Listo</a>
         </div>
       </div>
 

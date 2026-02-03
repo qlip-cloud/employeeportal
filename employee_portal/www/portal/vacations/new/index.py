@@ -1,44 +1,34 @@
 import frappe
-from frappe.utils import getdate, nowdate, date_diff # type: ignore
-from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
+from frappe import _
+from employee_portal.utils.permissions import require_employee, get_employee_or_throw
+from employee_portal.utils.calculations import calculate_vacation_days_remaining
+from employee_portal.utils.lookups import get_employees_list
+from employee_portal.services.employee_service import EmployeeService
+from employee_portal.services.leave_service import LeaveService
 
 
 def get_context(context):
-  is_guest()
-  is_employee()
-  context.employee = get_employee()
-  context.employees = frappe.get_all(
-      "Employee",
-      filters=[["user_id", "!=", frappe.session.user]],  
-      fields=["*"],
-      
-  )
-  # Validación 15 días de vacaciones
-  today = getdate(nowdate()) 
-  current_year = today.year
 
-  employee = context.employee
-  date_of_joining = frappe.get_value("Employee", employee.name, "date_of_joining")
+    require_employee(lambda: None)()
+    
+    try:
+  
+        profile_data = EmployeeService.get_employee_profile()
+        context.employee = profile_data['employee']
+        context.remaining_vacation_days = calculate_vacation_days_remaining(profile_data['employee'].name)
+        context.vacations = LeaveService.get_employee_vacations(profile_data['employee'].name)
+        context.employees_list = get_employees_list()
+        context.no_cache = 1
+        context.show_sidebar = True
+        context.parents = [
+            {"name": _("Portal"), "route": "/portal"}
+        ]
 
-  if date_of_joining:
-      date_of_joining = getdate(date_of_joining)
-
-      start_of_year = getdate(f"{current_year}-01-01")
-      days_worked = date_diff(today, max(date_of_joining, start_of_year))
-
-      max_vacation_days = (days_worked / 365) * 15
-
-      used_vacation_days = frappe.db.sql("""
-          SELECT COALESCE(SUM(total_leave_days), 0) 
-          FROM `tabLeave Application`
-          WHERE employee = %s 
-          AND leave_type = 'Vacaciones' 
-          AND status = 'Approved'
-          AND from_date >= %s
-      """, (employee.name, start_of_year))[0][0]
-
-      remaining_vacation_days = max(0, max_vacation_days - used_vacation_days)
-      context.remaining_vacation_days = round(remaining_vacation_days, 2)
-  else:
-      context.remaining_vacation_days = 0
-  return context    
+        context
+        
+    except frappe.PermissionError:
+        frappe.local.flags.redirect_location = "/login"
+        raise frappe.Redirect
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Error loading leave application page")
+        frappe.throw(_("Error al cargar la página de vacaciones"))

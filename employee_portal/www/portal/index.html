@@ -6,8 +6,8 @@
   <div class="row">
     <div class="col-md-9">
       <h2>Hola, {{employee.first_name}}!</h2><br>
-      <h3>Anuncios Recientes</h3>
       {% if announcements %}
+      <h3>Anuncios Recientes</h3>
       {% for announcement in announcements%}
       <div class="frappe-card mb-5">
         {% if announcement.image %}
@@ -33,12 +33,12 @@
           <img src="{{ event.image }}" class="card-img-top" alt="Imagen del Evento">
           {% endif %}
           <div class="card-body">
-            <h5 class="card-title">{{ event.subject }}</h5>
+            <h5 class="card-title">{{ event.title }}</h5>
             <p class="card-text">
-              <strong>Fecha de inicio:</strong> {{ event.starts_on }}<br>
-              <strong>Fecha de fin:</strong> {{ event.ends_on }}<br>
-              {% if event.description %}
-            <p>{{ event.description }}</p>
+              <strong>Fecha de inicio:</strong> {{ event.start }}<br>
+              <strong>Fecha de fin:</strong> {{ event.end }}<br>
+              {% if event.introduction %}
+            <span style="font-style: italic;">{{ event.introduction }}</span>
             {% endif %}
             </p>
           </div>

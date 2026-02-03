@@ -87,9 +87,9 @@ doctype_list_js = {"Appraisal" : "public/js/appraisal_list.js"}
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Appraisal": "employee_portal.overrides.appraisal.CustomAppraisal"
+}
 
 # Document Events
 # ---------------
@@ -148,7 +148,7 @@ doctype_list_js = {"Appraisal" : "public/js/appraisal_list.js"}
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
 
 get_website_user_home_page = (
-  "employee_portal.employee_portal.services.redirect_after_login.handler"
+  "employee_portal.utils.permissions.redirect_after_login"
 )
 
 # User Data Protection

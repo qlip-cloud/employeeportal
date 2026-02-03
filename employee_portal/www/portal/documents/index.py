@@ -1,11 +1,34 @@
 import frappe
+import json
+from frappe import _
+from employee_portal.utils.permissions import require_employee, get_employee_or_throw
+from employee_portal.services.employee_service import EmployeeService
+from employee_portal.utils.lookups import get_documents
 
-from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  # type: ignore
 
 def get_context(context):
-  is_guest()
-  is_employee()
-  context.employee = get_employee()
+
+    require_employee(lambda: None)()
+    
+    try:
   
-  context.documents = frappe.get_all("Policy File", fields=["*"])
-  return context
+        profile_data = EmployeeService.get_employee_profile()
+        
+        context.employee = profile_data['employee']
+        context.no_cache = 1
+        
+
+        context.parents = [
+            {"name": _("Portal"), "route": "/portal"}
+        ]
+        
+        documents = get_documents()
+        context.documents = documents
+    except frappe.PermissionError:
+        frappe.local.flags.redirect_location = "/login"
+        raise frappe.Redirect
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Error loading documents page")
+        frappe.throw(_("Error al cargar la página de documentos"))
+
+
