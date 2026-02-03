@@ -1,18 +1,32 @@
 import frappe
 from frappe import _
-from employee_portal.employee_portal.utils.validation import is_guest, is_employee, get_employee  
+from employee_portal.utils.permissions import require_employee, get_employee_or_throw
+from employee_portal.services.employee_service import EmployeeService
+from employee_portal.utils.lookups import get_genders
 
 
 def get_context(context):
-  is_guest()
-  is_employee()
-  context.employee = get_employee()
-  context.genders = frappe.get_all("Gender", fields=["gender"])
-  context.employment_types = frappe.get_all("Employment Type", fields=["employee_type_name"])
-  context.departments = frappe.get_all("Department", fields=["department_name"])  
-  context.designations = frappe.get_all("Designation", fields=["designation_name"])
-  
-  context.csrf_token = frappe.sessions.get_csrf_token()
-  context.no_cache = 1
 
-  return context
+    require_employee(lambda: None)()
+    
+    try:
+  
+        profile_data = EmployeeService.get_employee_profile()
+        
+        context.employee = profile_data['employee']
+        context.mentum_hours = profile_data['mentum_hours']
+        context.no_cache = 1
+        context.show_sidebar = True
+        
+        context.title = _("Mi Perfil")
+        context.parents = [
+            {"name": _("Portal"), "route": "/portal"}
+        ]
+        
+        context.genders = get_genders()
+    except frappe.PermissionError:
+        frappe.local.flags.redirect_location = "/login"
+        raise frappe.Redirect
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Error loading profile page")
+        frappe.throw(_("Error al cargar la página de perfil"))

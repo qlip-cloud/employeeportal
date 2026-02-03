@@ -20,6 +20,7 @@
           </h2>
             <div class="frappe-card">
               <h3>Información General</h3>
+              <input type="hidden" name="leave-name" id="leave-name" value="{{ leave.name }}">
               <div class="row">
                 <div class="col-md-6">
                   <div class="frappe-control">
@@ -88,12 +89,6 @@
                     <input type="text" id="total-hours" name="total_hours" class="form-control" value="{{ leave.total_leave_hours }}" readonly>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="frappe-control">
-                    <label for="available-hours">Horas Mentum Restantes</label>
-                    <input type="text" id="available-hours" name="available_hours" class="form-control" value="{{ leave.total_leave_hours }}" readonly>
-                  </div>
-                </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
@@ -114,19 +109,22 @@
                     <input type="text" id="status" name="status" class="form-control" value="{{ leave.status }}" readonly>
                   </div>
                 </div>
-              </div>
-              {% if leave.status == "Approved" %}
-                <div class="row">
+                {% if leave.status == "Approved" %}
                   <div class="col-md-6">
                     <div class="frappe-control">
                       <label for="approved-by">Aprobado por</label>
                       <input type="text" id="approved-by" name="approved_by" class="form-control" value="{{ employee.leave_approver }}" readonly>
                     </div>
-                  </div>
+                </div>
               {% endif %}
+              </div>
+              
             </div>
             <div class="row">
-              <div class="col-md-12 text-right"> 
+              <div class="col-md-12 text-right">
+                {% if has_permission_to_approve and leave.status != "Approved" %}
+                <input type="button" id="approve-leave-application" value="Aprobar" class="btn btn-save">
+                {% endif %}
                 <a href="/portal/leave_application/" data-url="/portal/leave_application/" class="module-link btn btn-save-outline">Listo</a>
               </div>
             </div>  

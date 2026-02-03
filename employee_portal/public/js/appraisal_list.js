@@ -1,27 +1,39 @@
 frappe.listview_settings['Appraisal'] = {
 	onload: function(listview) {
-		listview.page.add_inner_button(__('Bulk Appraise Employees'), function() {
+		listview.page.add_inner_button(__('Crear Evaluaciones Masivas'), function() {
 			// Crear diálogo para creación masiva de evaluaciones
 			let dialog = new frappe.ui.Dialog({
 				title: __('Crear Evaluaciones Masivas'),
 				fields: [
 					{
-						fieldname: 'employees',
-						label: __('Empleados'),
-						fieldtype: 'MultiSelectList',
-						reqd: 1,
-						get_data: function(txt) {
-							return frappe.db.get_link_options('Employee', txt);
-						}
+						fieldname: 'company',
+						label: __('Compañía'),
+						fieldtype: 'Link',
+						options: 'Company',
+						reqd: 1
 					},
 					{
-						fieldname: 'appraisal_template',
+						fieldname: 'kra_template',
 						label: __('Plantilla de Evaluación'),
 						fieldtype: 'Link',
 						options: 'Appraisal Template',
 						reqd: 1,
 						description: __('Seleccione la plantilla de evaluación a utilizar')
 					},
+					{
+						fieldname: 'is_performance_review',
+						label: __('¿Es Evaluación de Desempeño?'),
+						fieldtype: 'Check',
+						default: 0
+					},
+					{
+						fieldname: 'second_kra_template',
+						label: __('Segunda Plantilla de Evaluación (Supervisor)'),
+						fieldtype: 'Link',
+						options: 'Appraisal Template',
+						depends_on: 'eval:doc.is_performance_review==1',
+						description: __('Seleccione la plantilla para la evaluación del supervisor')
+					},	
 					{
 						fieldname: 'col_break',
 						fieldtype: 'Column Break'
@@ -42,11 +54,7 @@ frappe.listview_settings['Appraisal'] = {
 				],
 				primary_action_label: __('Crear Evaluaciones'),
 				primary_action: function(values) {
-					// Validar que se hayan seleccionado empleados
-					if (!values.employees || values.employees.length === 0) {
-						frappe.msgprint(__('Por favor seleccione al menos un empleado'));
-						return;
-					}
+		
 					
 					// Validar fechas
 					if (values.start_date && values.end_date) {
@@ -59,19 +67,21 @@ frappe.listview_settings['Appraisal'] = {
 					dialog.hide();
 					
 					frappe.call({
-						method: 'employee_portal.employee_portal.api.bulk_create_appraisals',
+						method: 'employee_portal.api.evaluation.bulk_create_appraisals',
 						args: {
-							employees: values.employees,
-							appraisal_template: values.appraisal_template,
+							company: values.company,
+							kra_template: values.kra_template,
+							second_kra_template: values.second_kra_template,
 							start_date: values.start_date,
-							end_date: values.end_date
+							end_date: values.end_date,
+							is_performance_review: values.is_performance_review
 						},
 						freeze: true,
 						freeze_message: __('Creando evaluaciones...'),
 						callback: function(r) {
-							if (r.message && r.message.status === 'success') {
+							if (r.message && r.message.success) {
 								frappe.show_alert({
-									message: r.message.message,
+									message: __('Evaluaciones creadas exitosamente'),
 									indicator: 'green'
 								}, 5);
 								
@@ -89,7 +99,7 @@ frappe.listview_settings['Appraisal'] = {
 							} else {
 								frappe.msgprint({
 									title: __('Error'),
-									message: r.message.message || __('Error al crear las evaluaciones'),
+									message: __('Error al crear las evaluaciones'),
 									indicator: 'red'
 								});
 							}

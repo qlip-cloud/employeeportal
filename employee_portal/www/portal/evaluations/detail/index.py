@@ -15,9 +15,13 @@ def get_context(context):
 
     evaluation = frappe.get_doc("Appraisal", evaluation_name)
 
-    context.is_editable = (
-        evaluation.status == "Draft" and evaluation.employee == employee.name
-    )
+    # Determinar si el usuario es el empleado evaluado o el evaluador
+    context.is_employee_view = (evaluation.employee == employee.name)
+    context.is_appraiser_view = (evaluation.appraiser == employee.name)
+    
+    # Los campos son editables solo si la evaluación está en Draft
+    context.is_editable = (evaluation.status == "Draft")
+    
     branch = frappe.get_doc("Branch", employee.branch)
     context.branch_leader = frappe.get_value(
         "Employee", branch.leader, "employee_name"

@@ -20,6 +20,9 @@
         Nueva Solicitud de Vacaciones
       </h2>
       <div class="frappe-card">
+        <label for="">En este periodo usted tiene disponibles {{ remaining_vacation_days }} días de vacaciones.</label>
+      </div>
+      <div class="frappe-card">
         <h3>Información General</h3>
         <input type="hidden" id="employee-name" value="{{ employee.name }}">
         <input type="hidden" id="employee" value="{{employee}}">
@@ -65,29 +68,11 @@
             <div class="frappe-control">
               <label for="replacement">Suplente</label>
               <select name="replacement" id="replacement" class="form-control">
-                {% for emp in employees %}
+                {% for emp in employees_list %}
                 <option value="{{ emp.name }}">{{ emp.employee_name }}</option>
                 {% endfor %}
               </select>
               <small style="font-style: italic;">Selecciona un empleado de la lista que pueda cubrir tus responsabilidades durante tu ausencia.</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="frappe-card">
-        <h3>Período Trabajado</h3>
-        <small style="font-style: italic;">Indica el período durante el cual has trabajado para el cual estás solicitando vacaciones.</small>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="frappe-control">
-              <label for="period-from">Período Desde</label>
-              <input type="date" id="period-from" name="period_from" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="frappe-control">
-              <label for="period-to">Período Hasta</label>
-              <input type="date" id="period-to" name="period_to" class="form-control">
             </div>
           </div>
         </div>
@@ -108,6 +93,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="frappe-card">
+        <h3>
         <div class="row">
           <div class="col-md-12">
             <div class="frappe-control">

@@ -1,14 +1,6 @@
 frappe.ui.form.on('Appraisal', {
-	kra_template: function (frm) {
-		if (frm.doc.kra_template) {
-			frappe.db.get_value('Appraisal Template', frm.doc.kra_template, 'is_180_evaluation')
-				.then(r => {
-					if (r.message) {
-						frm.set_value('is_180_evaluation', r.message.is_180_evaluation);
-						frm.trigger('toggle_180_fields');
-					}
-				});
-		}
+	is_performance_review: function (frm) {
+		frm.trigger('toggle_180_fields');
 	},
 
 	refresh: function (frm) {
@@ -16,7 +8,7 @@ frappe.ui.form.on('Appraisal', {
 	},
 
 	toggle_180_fields: function (frm) {
-		let show = frm.doc.is_180_evaluation;
+		let show = frm.doc.is_performance_review === 1;
 
 		const fields = [
 			'start_action',

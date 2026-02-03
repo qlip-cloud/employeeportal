@@ -44,22 +44,22 @@
         <div class="row">
           <div class="col-md-6">
             <div class="frappe-control">
-              <label>Plantilla de Evaluación</label>
-              <input type="text" class="form-control" value="{{ evaluation.kra_template }}" readonly>
+              <label for="employee">Nombre:</label>
+              <input type="text" class="form-control" value="{{ employee.employee_name }}" readonly>
             </div>
           </div>
           <div class="col-md-6">
             <div class="frappe-control">
-              <label>Estado</label>
-              <input type="text" class="form-control" value="{{ _(evaluation.status) }}" readonly>
+              <label>Cargo:</label>
+              <input type="text" class="form-control" value="{{ employee.designation if employee.designation else '' }}">
             </div>
           </div>
         </div>
-        <div class="row">
+         <div class="row">
           <div class="col-md-6">
             <div class="frappe-control">
-              <label>Fecha de Evaluación</label>
-              <input type="text" class="form-control" value="{{ evaluation.appraisal_date }}" readonly>
+              <label>Banda:</label>
+              <input type="text" class="form-control" value="{{ evaluation.branch if evaluation.branch else employee.branch }}" readonly>
             </div>
           </div>
           <div class="col-md-6">
@@ -72,8 +72,22 @@
         <div class="row">
           <div class="col-md-6">
             <div class="frappe-control">
-              <label>Banda:</label>
-              <input type="text" class="form-control" value="{{ evaluation.branch if evaluation.branch else employee.branch }}" readonly>
+              <label>Plantilla de Evaluación</label>
+              <input type="text" class="form-control" value="{{ evaluation.kra_template }}" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label>Fecha de Evaluación</label>
+              <input type="text" class="form-control" value="{{ evaluation.start_date }}" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label>Estado</label>
+              <input type="text" class="form-control" value="{{ _(evaluation.status) }}" readonly>
             </div>
           </div>
         </div>
@@ -87,8 +101,14 @@
             <tr>
               <th>No.</th>
               <th>Objetivo</th>
-              <th>Puntuación (0-5)</th>
+              <th>Porcentaje (%)</th>
+              {% if is_employee_view %}
               <th>Autoevaluación (0-5)</th>
+              <th>Puntuación del Evaluador (0-5)</th>
+              {% else %}
+              <th>Autoevaluación (0-5)</th>
+              <th>Puntuación (0-5)</th>
+              {% endif %}
               <th>Puntuación obtenida</th>
             </tr>
           </thead>
@@ -97,13 +117,26 @@
             <tr>
               <td>{{ loop.index }}</td>
               <td>{{ goal.kra }}</td>
-              <td>{{ goal.score }}</td>
+              <td>{{ goal.per_weightage }}</td>
+              {% if is_employee_view %}
               <td>
                 <input type="number" class="form-control goal-self-assessment" 
                        data-goal-name="{{ goal.name }}" 
                        value="{{ goal.self_assessment or '' }}" 
-                       min="0" max="5" step="0.1">
+                       min="0" max="5" step="0.1"
+                       {% if not is_editable %}readonly{% endif %}>
               </td>
+              <td>{{ goal.score or '' }}</td>
+              {% else %}
+              <td>{{ goal.self_assessment or '' }}</td>
+              <td>
+                <input type="number" class="form-control goal-score" 
+                       data-goal-name="{{ goal.name }}" 
+                       value="{{ goal.score or '' }}" 
+                       min="0" max="5" step="0.1"
+                       {% if not is_editable %}readonly{% endif %}>
+              </td>
+              {% endif %}
               <td>{{ goal.score_earned }}</td>
             </tr>
             {% endfor %}
@@ -112,9 +145,10 @@
       </div>
 
       <!-- Fortalezas -->
+      {% if evaluation.is_performance_review %}
       <div class="frappe-card">
         <h3>Fortalezas de Desempeño</h3>
-        <textarea class="form-control" rows="3" id="remarks">{{ evaluation.remarks or '' }}</textarea {% if not is_editable %}readonly{% endif %}>
+        <textarea class="form-control" rows="3" id="remarks" {% if not is_editable %}readonly{% endif %}>{{ evaluation.remarks or '' }}</textarea>
       </div>
 
       <!-- Plan de Acción -->
@@ -124,25 +158,26 @@
           <div class="col-md-4">
             <div class="frappe-control">
               <label>Acciones de Mejora</label>
-              <textarea class="form-control" rows="3" id="stop-action">{{ evaluation.stop_action or '' }}</textarea>
+              <textarea class="form-control" rows="3" id="stop-action" {% if not is_editable %}readonly{% endif %}>{{ evaluation.stop_action or '' }}</textarea>
             </div>
           </div>
           <div class="col-md-4">
             <div class="frappe-control">
               <label>Buenas Prácticas</label>
-              <textarea class="form-control" rows="3" id="continue-action">{{ evaluation.continue_action or '' }}</textarea>
+              <textarea class="form-control" rows="3" id="continue-action" {% if not is_editable %}readonly{% endif %}>{{ evaluation.continue_action or '' }}</textarea>
             </div>
           </div>
           <div class="col-md-4">
             <div class="frappe-control">
               <label>Lecciones Aprendidas</label>
-              <textarea class="form-control" rows="3" id="start-action">{{ evaluation.start_action or '' }}</textarea>
+              <textarea class="form-control" rows="3" id="start-action" {% if not is_editable %}readonly{% endif %}>{{ evaluation.start_action or '' }}</textarea>
             </div>
           </div>
         </div>
       </div>
-
+      {% endif %}
       <!-- Evaluación al Jefe -->
+       {% if evaluation.is_performance_review and evaluation.supervisor_feedback and is_employee_view %}
       <div class="frappe-card">
         <h3>Evalúo a mi Jefe</h3>
         <table>
@@ -166,17 +201,24 @@
                 <input type="number" class="form-control supervisor-score" 
                        data-supervisor-name="{{ competency.name }}" 
                        value="{{ competency.score_earned or '' }}" 
-                       min="0" max="5" step="0.1">
+                       min="0" max="5" step="0.1"
+                       {% if not is_editable %}readonly{% endif %}>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+      {% endif %}
       <div class="row">
         <div class="col-md-12 text-right">
           <input type="hidden" id="appraisal-name" value="{{ evaluation.name }}">
+          <input type="hidden" id="is-employee-view" value="{{ 'true' if is_employee_view else 'false' }}">
+          <input type="hidden" id="is-appraiser-view" value="{{ 'true' if is_appraiser_view else 'false' }}">
+          {% if is_editable %}
           <input type="button" id="appraisal-save" value="Guardar" class="btn btn-save">
+          {% endif %}
+          <a href="/portal/evaluations/" data-url="/portal/evaluations/" class="module-link btn btn-save-outline">Listo</a>
         </div>
       </div>
     </div>

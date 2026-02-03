@@ -63,7 +63,7 @@
                       <label for="gender">Género*</label>
                       <select name="gender" id="gender" class="form-control">
                         {% for gender in genders%}
-                          <option value="{{gender.gender}}" {% if employee.gender == gender.gender %}selected{% endif %}>{{gender.gender}}</option>
+                          <option value="{{gender.gender}}" {% if employee.gender == gender.gender %}selected{% endif %}>{{_(gender.gender)}}</option>
                         {% endfor %}
                       </select>
                     </div>

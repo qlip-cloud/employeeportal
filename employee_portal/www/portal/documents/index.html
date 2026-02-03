@@ -31,18 +31,9 @@
           </tbody>
         </table>
       {% else %}
-        <!-- Mensaje si no hay solicitudes -->
-        <p class="text-center">No has hecho ninguna solicitud de permiso o ausencia.</p>
+        <p class="text-center">No se han cargado documentos.</p>
       {% endif %}
     </div>
   </div>
 </div>
-{% endblock %}
-{% block script %}
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#table-documents').DataTable();
-  });
-</script>
-{% endblock %}
+{% endblock %}  
