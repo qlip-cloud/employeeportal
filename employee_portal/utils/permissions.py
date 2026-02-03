@@ -57,7 +57,7 @@ def get_employee_or_throw():
         )
     return employee
 
-def redirect_after_login():
+def redirect_after_login(user=None):
     clear_cache()
 
     if is_guest():
