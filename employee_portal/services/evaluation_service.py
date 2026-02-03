@@ -2,7 +2,7 @@ from datetime import timedelta
 import frappe
 import json
 from frappe import _
-from frappe.utils import getdate, now_datetime
+from frappe.utils import getdate, now_datetime # type: ignore
 from employee_portal.utils.permissions import get_employee_or_throw
 
 
