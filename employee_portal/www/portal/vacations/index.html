@@ -1,0 +1,51 @@
+{% extends "employee_portal/templates/includes/base.html" %}
+
+{% block title %}{{ ("Mis Solicitudes de Vacaciones") }}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Mis Solicitudes de Vacaciones</h2>
+
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <a href="vacations/new" data-url="vacations/new" class="module-link btn btn-save-outline mb-4">Crear Nueva
+            Solicitud</a>
+        </div>
+      </div>
+
+      {% if vacations %}
+      <table class="table table-bordered frappe-list display" id="table-applications" style="width: 100%;">
+        <thead>
+          <tr>
+            <th>Desde</th>
+            <th>Hasta</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for leave in vacations %}
+          <tr>
+            <td>{{ leave.from_date }}</td>
+            <td>{{ leave.to_date }}</td>
+            <td>{{ leave.status }}</td>
+            <td class="text-center">
+              <a href="/portal/vacations/details?name={{ leave.name }}" data-url="/portal/vacations/details?name={{ leave.name }}"
+                class="module-link">
+                <span class="material-symbols-outlined" style="color: #757371;">visibility</span>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      {% else %}
+      <p class="text-center">No has hecho ninguna solicitud de vacaciones.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

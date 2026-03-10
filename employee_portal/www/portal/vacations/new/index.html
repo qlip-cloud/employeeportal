@@ -1,0 +1,117 @@
+{% extends "employee_portal/templates/includes/base.html" %}
+{% block title %}{{ ("Nueva Solicitud de Vacaciones") }}{% endblock %}
+{% block page_content %}
+<style>
+  .frappe-card {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+
+  .frappe-control {
+    margin-bottom: 20px;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>
+        Nueva Solicitud de Vacaciones
+      </h2>
+      <div class="frappe-card">
+        <label for="">En este periodo usted tiene disponibles {{ remaining_vacation_days }} días de vacaciones.</label>
+      </div>
+      <div class="frappe-card">
+        <h3>Información General</h3>
+        <input type="hidden" id="employee-name" value="{{ employee.name }}">
+        <input type="hidden" id="employee" value="{{employee}}">
+        <input type="hidden" id="leave-approver" value="{{ employee.leave_approver }}">
+        <input type="hidden" name="company" value="{{ employee.company }}">
+        <input type="hidden" id="leave-status" name="leave-status" value="Open">
+        <input type="hidden" name="remaining_vacation_days" id="remaining_vacation_days" value="{{ remaining_vacation_days }}">
+        <input type="hidden" id="leave-type" name="leave-type" value="Vacaciones">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="posting-date">Fecha de Solicitud</label>
+              <input type="date" id="posting-date" name="posting_date" class="form-control"
+                value="{{ frappe.utils.nowdate() }}" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="department">Proceso / Departamento</label>
+              <input type="text" id="department" name="employee_department" class="form-control"
+                value="{{ employee.department }}" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="employee-full-name">Nombre del Empleado</label>
+              <input type="text" id="employee-full-name" name="employee_name" class="form-control"
+                value="{{ employee.employee_name }}" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="employee-id-number">Número de Identificación</label>
+              <input type="text" id="employee-id-number" name="employee_id_number" class="form-control" value="{{ employee.employee_id_number }}"
+                readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="replacement">Suplente</label>
+              <select name="replacement" id="replacement" class="form-control">
+                {% for emp in employees_list %}
+                <option value="{{ emp.name }}">{{ emp.employee_name }}</option>
+                {% endfor %}
+              </select>
+              <small style="font-style: italic;">Selecciona un empleado de la lista que pueda cubrir tus responsabilidades durante tu ausencia.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frappe-card">
+        <h3>Tiempo Solicitado</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="from-datetime">Desde</label>
+              <input type="date" id="from-datetime" name="from_datetime" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="frappe-control">
+              <label for="to-datetime">Hasta</label>
+              <input type="date" id="to-datetime" name="to_datetime" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frappe-card">
+        <h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="frappe-control">
+              <label for="description">Observaciones del Empleado</label>
+              <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <input type="button" id="send-vacation" value="Enviar Solicitud" class="btn btn-save">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

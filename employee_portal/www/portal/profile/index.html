@@ -1,0 +1,203 @@
+{% extends "employee_portal/templates/includes/base.html" %}
+
+{% block title %}{{ ("Mis Datos") }}{% endblock %}
+{% block page_content %} 
+<style>
+  .frappe-card{
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+  .frappe-control {
+    margin-bottom: 20px;
+  }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+              Mis Datos
+            </h2>
+              <input type="hidden" id="employee-name" value="{{ employee.name }}">
+              <input type="hidden" id="csrf_token" value="{{csrf_token}}">
+              <div class="frappe-card">
+                <h3>Información Personal</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="first_name">Primer Nombre*</label>
+                      <input type="text" name="first_name" id="first_name" class="form-control" value="{{employee.first_name if employee.first_name}}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="email">Segundo Nombre</label>
+                      <input type="text" name="middle_name" id="middle_name" class="form-control" value="{{employee.middle_name if employee.middle_name}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="last_name">Apellidos*</label>
+                      <input type="text" name="last_name" id="last_name" class="form-control" value="{{employee.last_name if employee.last_name}}">
+                    </div>        
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="employee_id_number">Número de Identificación*</label>
+                      <input type="text" name="employee_id_number" id="employee_id_number" class="form-control" value="{{employee.employee_id_number if employee.employee_id_number}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="dob">Fecha de Nacimiento*</label>
+                      <input type="date" name="dob" id="dob" class="form-control" value="{{employee.date_of_birth if employee.date_of_birth}}">
+                    </div>  
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="gender">Género*</label>
+                      <select name="gender" id="gender" class="form-control">
+                        {% for gender in genders%}
+                          <option value="{{gender.gender}}" {% if employee.gender == gender.gender %}selected{% endif %}>{{_(gender.gender)}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frappe-card">
+                <h3>Detalles de Contacto</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="employee-number">Número Telefónico</label>
+                      <input type="tel" name="employee-number" id="employee-number" class="form-control" value="{{employee.employee_number if employee.employee_number}}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="emergency-phone">Teléfono de Emergencia</label>
+                      <input type="tel" name="emergency-phone" id="emergency-phone" class="form-control" value="{{employee.emergency_phone_number if employee.emergency_phone_number}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="emergency-contact">Contacto de Emergencia</label>
+                        <input type="text" name="emergency-contact" id="emergency-contact" class="form-control" value="{{employee.person_to_be_contacted if employee.person_to_be_contacted}}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="relation">Relación con el Contacto de Emergencia</label>
+                      <input type="text" name="relation" id="relation" class="form-control" value="{{employee.relation if employee.relation}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="current_accommodation_type">La dirección actual es</label>
+                      <select name="current_accommodation_type" id="current_accommodation_type" class="form-control">
+                        <option value="Rented" {% if employee.current_accommodation_type == "Rented" %}selected{% endif %}>Alquilada</option>
+                        <option value="Owned" {% if employee.current_accommodation_type == "Owned" %}selected{% endif %}>Propia</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="current_address">Dirección Actual</label>
+                      <input type="text" name="current_address" id="current_address" class="form-control" value="{{employee.current_address if employee.current_address}}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frappe-card">
+                <h3>Detalles del Empleo</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="company">Compañía</label>
+                      <input type="text" name="company" id="company" class="form-control" value="{{employee.company if employee.company}}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="employement-type">Tipo de Empleo</label>
+                      <input type="text" name="employment-type" id="employment-type" class="form-control" value="{{employee.employment_type if employee.employment_type}}" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="department">Departamento</label>
+                      <input type="text" name="department" id="department" class="form-control" value="{{employee.department if employee.department}}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="designation">Puesto</label>
+                      <input type="text" name="designation" id="designation" class="form-control" value="{{employee.designation if employee.designation}}" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="reports_to">Líder / Jefe Directo</label>
+                      <input type="text" name="reports_to" id="reports_to" class="form-control" value="{{employee.reports_to if employee.reports_to}}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="date-of-joining">Fecha de Ingreso</label>
+                      <input type="date" name="date-of-joining" id="date-of-joining" class="form-control" value="{{employee.date_of_joining if employee.date_of_joining}}" readonly> 
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="date-of-leaving">Fecha de Terminación de Contrato</label>
+                      <input type="date" name="date-of-leaving" id="date-of-leaving" class="form-control" value="{{employee.contract_end_date if employee.contract_end_date}}" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frappe-card">
+                <h3>
+                  Información Adicional
+                </h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="family_background">Antecedentes Familiares</label>
+                      <textarea name="family_background" id="family_background" class="form-control" >{{employee.family_background if employee.family_background}}</textarea>
+                      <small>Aquí usted puede ingresar los detalles de la familia como el nombre y ocupación de los padres, cónyuge e hijos</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="frappe-control">
+                      <label for="health_details">Detalles de Salud</label>
+                      <textarea name="health_details" id="health_details" class="form-control">{{employee.health_details if employee.health_details}}</textarea>
+                      <small>Aquí usted puede ingresar la altura, el peso, alergias, problemas médicos, etc.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-right"> 
+                    <input type="button" id="profile-save" value="Guardar" class="btn btn-save">
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

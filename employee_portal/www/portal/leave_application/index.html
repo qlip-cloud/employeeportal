@@ -1,0 +1,104 @@
+  {% extends "employee_portal/templates/includes/base.html" %}
+  {% block style %}
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  {% endblock %}
+
+  {% block title %}{{ ("Mis Permisos/Ausencias") }}{% endblock %}
+
+  {% block page_content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Mis Permisos/Ausencias</h2>
+
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <label>Horas Mentum restantes: {{ mentum_hours }}</label>
+            <a href="/portal/leave_application/new" data-url="/portal/leave_application/new"
+              class="module-link btn btn-save-outline mb-4">Crear Nueva Solicitud</a>
+          </div>
+        </div>
+
+        {% if leaves %}
+        <table class="table table-bordered frappe-list display" id="table-leaves" style="width: 100%;">
+          <thead>
+            <tr>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Tipo de Permiso</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for leave in leaves %}
+            {% if leave.leave_type != "Vacaciones" %}
+            <tr>
+              <td>{{ leave.from_datetime }}</td>
+              <td>{{ leave.to_datetime }}</td>
+              <td>{{ leave.leave_type }}</td> 
+              <td>{{ leave.status }}</td>
+              <td class="text-center">
+                <a href="/portal/leave_application/details?name={{ leave.name }}"
+                  data-url="/portal/leave_application/details?name={{ leave.name }}"
+                  class="module-link">
+                  <span class="material-symbols-outlined" style="color: #757371;">visibility</span>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="text-center">No has hecho ninguna solicitud de permiso o ausencia.</p>
+        {% endif %}
+      </div>
+    </div>
+    {% if my_employees_leaves %}
+     <div class="row">
+      <div class="col-md-12">
+        <h2>Permisos/Ausencias de mis empleados</h2>
+
+        {% if my_employees_leaves %}
+        <table class="table table-bordered frappe-list display" id="table-my-employees-leaves" style="width: 100%;">
+          <thead>
+            <tr>
+              <th>Empleado</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Tipo de Permiso</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for leave in my_employees_leaves %}
+            {% if leave.leave_type != "Vacaciones" %}
+            <tr>
+              <td>{{ leave.employee_name }}</td>
+              <td>{{ leave.from_datetime }}</td>
+              <td>{{ leave.to_datetime }}</td>
+              <td>{{ leave.leave_type }}</td> 
+              <td>{{ leave.status }}</td>
+              <td class="text-center">
+                <a href="/portal/leave_application/details?name={{ leave.name }}"
+                  data-url="/portal/leave_application/details?name={{ leave.name }}"
+                  class="module-link">
+                  <span class="material-symbols-outlined" style="color: #757371;">visibility</span>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="text-center">No has hecho ninguna solicitud de permiso o ausencia.</p>
+        {% endif %}
+      </div>
+    </div>
+    {%endif%}
+  </div>
+  {% endblock %}
