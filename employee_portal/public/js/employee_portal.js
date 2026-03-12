@@ -431,14 +431,30 @@ function initEmployeePortalEvents() {
     });
   }
 
-  
-  $('#table-applications').DataTable();
-  $('#table-leaves').DataTable();
-  $('#table-my-employees-leaves').DataTable();
-  $('#table-documents').DataTable();
-  $('#activeEvaluationsTable').DataTable();
-  $('#activeEvaluationsSupervisorTable').DataTable();
-  $('#completedEvaluationsTable').DataTable();
+  // Inicializar DataTables solo si existen los elementos y la librería está disponible
+  if ($.fn.DataTable) {
+    if ($('#table-applications').length) {
+      $('#table-applications').DataTable();
+    }
+    if ($('#table-leaves').length) {
+      $('#table-leaves').DataTable();
+    }
+    if ($('#table-my-employees-leaves').length) {
+      $('#table-my-employees-leaves').DataTable();
+    }
+    if ($('#table-documents').length) {
+      $('#table-documents').DataTable();
+    }
+    if ($('#activeEvaluationsTable').length) {
+      $('#activeEvaluationsTable').DataTable();
+    }
+    if ($('#activeEvaluationsSupervisorTable').length) {
+      $('#activeEvaluationsSupervisorTable').DataTable();
+    }
+    if ($('#completedEvaluationsTable').length) {
+      $('#completedEvaluationsTable').DataTable();
+    }
+  }
 
   $('#approve-leave-application').off('click').on('click', function() {
       const leave_application_name = $('#leave-name').val();
