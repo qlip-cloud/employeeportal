@@ -388,7 +388,6 @@ function initEmployeePortalEvents() {
       if (feedback.score_earned < 0 || feedback.score_earned > 5) {
         valid = false;
       }
-web_include_js = "/assets/employee_portal/js/employee_portal.js"
     });
     
     if (!valid) {
